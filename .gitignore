@@ -1,0 +1,5 @@
+# Archivos de VS Code
+.vscode/
+
+# Directorio de los binarios .class
+bin/
