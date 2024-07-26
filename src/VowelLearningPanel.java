@@ -9,9 +9,15 @@ import java.io.File;
 import java.io.IOException;
 
 public class VowelLearningPanel extends JPanel {
+
+    private Image fondo;
+
     private Map<String, String> vowelSounds;
 
     public VowelLearningPanel(Game game) {
+        //Añado la imagen
+        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+
         vowelSounds = new LinkedHashMap<>();
         vowelSounds.put("A", "sounds/a.wav");
         vowelSounds.put("E", "sounds/e.wav");
@@ -58,5 +64,12 @@ public class VowelLearningPanel extends JPanel {
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g){
+        super.paintComponent(g);
+
+        g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
     }
 }
