@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 
 public class VowelLearningPanel extends JPanel {
     private Map<String, String> vowelSounds;
@@ -61,7 +64,15 @@ public class VowelLearningPanel extends JPanel {
     }
 
     private void playSound(String soundFile) {
-        // Implementa la lógica para reproducir el sonido
+        try {
+            File audioFile = new File(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void replaceVowel(String vowel) {
