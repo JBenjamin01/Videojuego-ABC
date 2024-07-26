@@ -11,11 +11,10 @@ import java.io.IOException;
 public class VowelLearningPanel extends JPanel {
 
     private Image fondo;
-
     private Map<String, String> vowelSounds;
 
     public VowelLearningPanel(Game game) {
-        //Añado la imagen
+        // Añadir la imagen de fondo
         fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
 
         vowelSounds = new LinkedHashMap<>();
@@ -29,9 +28,12 @@ public class VowelLearningPanel extends JPanel {
 
         // Panel para las vocales
         JPanel vowelsPanel = new JPanel(new GridLayout(1, 5));
+        vowelsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Ajustar espaciado entre botones
+        vowelsPanel.setOpaque(false); // Hacer transparente el panel de botones
         for (String vowel : vowelSounds.keySet()) {
             JButton vowelButton = new JButton(vowel);
-            vowelButton.setFont(new Font("Serif", Font.PLAIN, 100));
+            vowelButton.setFont(new Font("Serif", Font.PLAIN, 25)); // Tamaño de fuente ajustado
+            vowelButton.setPreferredSize(new Dimension(70, 70)); // Tamaño de botón ajustado
             vowelButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     playSound(vowelSounds.get(vowel));
@@ -46,7 +48,7 @@ public class VowelLearningPanel extends JPanel {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.showPanel("Evaluation");
+                game.showPanel("CharacterSelection");
             }
         });
 
@@ -67,9 +69,8 @@ public class VowelLearningPanel extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
     }
 }
