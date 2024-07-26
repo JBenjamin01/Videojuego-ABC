@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.sound.sampled.*;
 import java.io.File;
@@ -10,13 +10,9 @@ import java.io.IOException;
 
 public class VowelLearningPanel extends JPanel {
     private Map<String, String> vowelSounds;
-    private JTextArea wordArea;
-    private String currentWord;
-    private final String[] words = {"_S_", "_RR_R", "V_C_"};
-    private int wordIndex = 0;
 
     public VowelLearningPanel(Game game) {
-        vowelSounds = new HashMap<>();
+        vowelSounds = new LinkedHashMap<>();
         vowelSounds.put("A", "sounds/a.wav");
         vowelSounds.put("E", "sounds/e.wav");
         vowelSounds.put("I", "sounds/i.wav");
@@ -25,41 +21,30 @@ public class VowelLearningPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        // Area para mostrar la palabra con vocales difuminadas
-        wordArea = new JTextArea(5, 20);
-        wordArea.setEditable(false);
-        wordArea.setFont(new Font("Serif", Font.PLAIN, 24));
-        wordArea.setText(words[wordIndex]);
-
-        // Botones para las vocales
-        JPanel vowelsPanel = new JPanel();
+        // Panel para las vocales
+        JPanel vowelsPanel = new JPanel(new GridLayout(1, 5));
         for (String vowel : vowelSounds.keySet()) {
             JButton vowelButton = new JButton(vowel);
+            vowelButton.setFont(new Font("Serif", Font.PLAIN, 100));
             vowelButton.addActionListener(new ActionListener() {
-                @Override
                 public void actionPerformed(ActionEvent e) {
-                    replaceVowel(vowel);
                     playSound(vowelSounds.get(vowel));
                 }
             });
             vowelsPanel.add(vowelButton);
         }
 
-        JButton nextButton = new JButton("Next");
+        // Botón "Siguiente"
+        JButton nextButton = new JButton("Siguiente");
+        nextButton.setFont(new Font("Serif", Font.PLAIN, 30)); // Tamaño de fuente grande
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                wordIndex++;
-                if (wordIndex < words.length) {
-                    wordArea.setText(words[wordIndex]);
-                } else {
-                    game.showPanel("Evaluation");
-                }
+                game.showPanel("Evaluation");
             }
         });
 
-        add(new JScrollPane(wordArea), BorderLayout.CENTER);
-        add(vowelsPanel, BorderLayout.NORTH);
+        add(vowelsPanel, BorderLayout.CENTER);
         add(nextButton, BorderLayout.SOUTH);
     }
 
@@ -72,15 +57,6 @@ public class VowelLearningPanel extends JPanel {
             clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             ex.printStackTrace();
-        }
-    }
-
-    private void replaceVowel(String vowel) {
-        if (wordIndex < words.length) {
-            String currentWord = words[wordIndex];
-            String newWord = currentWord.replaceFirst("_", vowel);
-            wordArea.setText(newWord);
-            words[wordIndex] = newWord;  // Actualiza la palabra actual
         }
     }
 }
