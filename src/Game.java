@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 public class Game extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private String selectedCharacter;
 
     public Game() {
         cardLayout = new CardLayout();
@@ -28,7 +29,7 @@ public class Game extends JFrame {
     }
 
     public void selectCharacter(String characterName) {
-        // Almacenar el personaje seleccionado
+        // Almacena el personaje seleccionado
         this.selectedCharacter = characterName;
         System.out.println("Personaje seleccionado: " + characterName);
         showPanel("VowelLearning");
