@@ -1,5 +1,8 @@
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JLabel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Graphics;
@@ -23,9 +26,21 @@ public class CharacterSelectionPanel extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new java.awt.Insets(10, 10, 10, 10);
 
-        // Crear y añadir los botones de personaje con imágenes redimensionadas
+        JLabel messageLabel = new JLabel("Elija un personaje");
+        messageLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Ajusta la fuente del mensaje
+        messageLabel.setForeground(Color.BLUE);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 3; // centrar
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        this.add(messageLabel, gbc);
+
+        gbc.gridwidth = 1; 
+        gbc.gridy = 1;
         this.add(createCharacterButton(game, "imagenes/stitch.png", "Stitch"));
+        gbc.gridy = 1;
         this.add(createCharacterButton(game, "imagenes/pooh.png", "Pooh"));
+        gbc.gridy = 1;
         this.add(createCharacterButton(game, "imagenes/dalmata.png", "Dalmata"));
     }
 
