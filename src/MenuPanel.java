@@ -22,7 +22,7 @@ public class MenuPanel extends JPanel {
         startButton.setForeground(Color.WHITE);
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                game.showPanel("CharacterSelection");
+                game.showPanel("Evaluation");
             }
         });
         this.add(startButton);

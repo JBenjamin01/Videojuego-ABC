@@ -12,7 +12,6 @@ public class Game extends JFrame {
 
         // Agregar paneles a la interfaz
         mainPanel.add(new MenuPanel(this), "Menu");
-        mainPanel.add(new CharacterSelectionPanel(this), "CharacterSelection");
         mainPanel.add(new VowelLearningPanel(this), "VowelLearning");
         mainPanel.add(new EvaluationPanel(this), "Evaluation");
         mainPanel.add(new MinigamePanel(this), "MinigamePanel"); 
