@@ -24,7 +24,7 @@ public class EvaluationPanel extends JPanel {
         exercises.put("Escoge la vocal correcta: f_ll", "FILL");
 
         // Área para mostrar los ejercicios
-        exerciseArea = new JTextArea(10, 30);
+        exerciseArea = new JTextArea(1, 2);
         exerciseArea.setEditable(false);
         exerciseArea.setFont(new Font("Serif", Font.PLAIN, 18));
         exerciseArea.setText(getCurrentExercise());
