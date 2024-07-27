@@ -224,13 +224,13 @@ public class EvaluationPanel extends JPanel {
     private void checkAnswer(String vowel) {
         String exerciseText = exerciseArea.getText();
         String correctAnswer = exercises.get(getCurrentExercise());
-
-        if (correctAnswer != null && correctAnswer.contains(vowel)) {
-            // Update the exercise text with the selected vowel
+    
+        if (correctAnswer != null && correctAnswer.startsWith(vowel)) {
+            // Reemplazar el primer "_" con la vocal seleccionada
             exerciseText = exerciseText.replaceFirst("_", vowel);
             exerciseArea.setText(exerciseText);
-
-            // Check if the exercise is complete
+    
+            // Verificar si el ejercicio está completo
             if (!exerciseText.contains("_")) {
                 JOptionPane.showMessageDialog(this, "Correcto! Vamos al siguiente.");
                 exerciseIndex++;
@@ -242,7 +242,7 @@ public class EvaluationPanel extends JPanel {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Incorrecto! Intentalo de nuevo.");
+            JOptionPane.showMessageDialog(this, "Incorrecto! Inténtalo de nuevo.");
         }
     }
 
