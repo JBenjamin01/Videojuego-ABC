@@ -35,16 +35,60 @@ public class EvaluationPanel extends JPanel {
 
         // Inicializar los ejercicios
         exercises = new HashMap<>();
-        exercises.put("G_T_", "GATO");
-        exercises.put("C_S_", "CASA");
-        exercises.put("S_P_", "SAPO");
-        exercises.put("P_P_", "PAPA");
-        exercises.put("M_S_", "MESA");
-        exercises.put("P_Z", "PEZ");
-        exercises.put("V_L_", "VELA");
-        exercises.put("P_R_", "PERA");
-        exercises.put("L_BR_", "LIBRO");
-        exercises.put("_SL_", "ISLA");
+        exercises.put("_RROZ", "ARROZ");
+        exercises.put("_MIGO", "AMIGO");
+        exercises.put("_VE", "AVE");
+        exercises.put("_ÑO", "AÑO");
+        exercises.put("_RBOL", "ÁRBOL");
+        exercises.put("_GUA", "AGUA");
+        exercises.put("_LA", "ALA");
+        exercises.put("_JO", "AJO");
+        exercises.put("_MOR", "AMOR");
+        exercises.put("_ZUL", "AZUL");
+
+        exercises.put("_LEFANTE", "ELEFANTE");
+        exercises.put("_SPEJO", "ESPEJO");
+        exercises.put("_STRELLA", "ESTRELLA");
+        exercises.put("_SPINA", "ESPINA");
+        exercises.put("_SQUINA", "ESQUINA");
+        exercises.put("_SCUELA", "ESCUELA");
+        exercises.put("_SCOBA", "ESCOBA");
+        exercises.put("_NANO", "ENANO");
+        exercises.put("_NTRADA", "ENTRADA");
+        exercises.put("_SQUÍ", "ESQUÍ");
+
+        exercises.put("_SLA", "ISLA");
+        exercises.put("_GLESIA", "IGLESIA");
+        exercises.put("_NSECTO", "INSECTO");
+        exercises.put("_GLÚ", "IGLÚ");
+        exercises.put("_NSTRUMENTO", "INSTRUMENTO");
+        exercises.put("_NCENDIO", "INCENDIO");
+        exercises.put("_MPRESORA", "IMPRESORA");
+        exercises.put("_NVIERNO", "INVIERNO");
+        exercises.put("_MÁN", "IMÁN");
+        exercises.put("_GUANA", "IGUANA");
+
+        exercises.put("_SO", "OSO");
+        exercises.put("_RO", "ORO");
+        exercises.put("_REJA", "OREJA");
+        exercises.put("_LA", "OLA");
+        exercises.put("_JO", "OJO");
+        exercises.put("_VEJA", "OVEJA");
+        exercises.put("_LOR", "OLOR");
+        exercises.put("_ÍDO", "OÍDO");
+        exercises.put("_PCIÓN", "OPCIÓN");
+        exercises.put("_RBITA", "ÓRBITA");
+
+        exercises.put("_VA", "UVA");
+        exercises.put("_NO", "UNO");
+        exercises.put("_ÑA", "UÑA");
+        exercises.put("_NICORNIO", "UNICORNIO");
+        exercises.put("_RRACA", "URRACA");
+        exercises.put("_NIÓN", "UNIÓN");
+        exercises.put("_NIFORME", "UNIFORME");
+        exercises.put("_RGENCIA", "URGENCIA");
+        exercises.put("_TIL", "ÚTIL");
+        exercises.put("_LTIMO", "ÚLTIMO");
 
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
