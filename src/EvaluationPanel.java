@@ -12,7 +12,7 @@ public class EvaluationPanel extends JPanel {
     private int exerciseIndex = 0;
 
     public EvaluationPanel(Game game) {
-        //Añado la imagen
+        // Añado la imagen
         fondo = new ImageIcon(getClass().getResource("imagenes/fondo.jpg")).getImage();
 
         setLayout(new BorderLayout());
@@ -26,7 +26,7 @@ public class EvaluationPanel extends JPanel {
         exercises.put("M_S_", "MESA");
         exercises.put("P_Z", "PEZ");
         exercises.put("V_L_", "VELA");
-        exercises.put("P_R_", "PERA");        
+        exercises.put("P_R_", "PERA");
         exercises.put("L_BR_", "LIBRO");
         exercises.put("_SL_", "ISLA");
 
@@ -34,6 +34,7 @@ public class EvaluationPanel extends JPanel {
         exerciseArea = new JLabel();
         exerciseArea.setFont(new Font("Serif", Font.PLAIN, 18));
         exerciseArea.setText(getCurrentExercise());
+
 
         // Panel para botones de respuestas
         JPanel answersPanel = new JPanel(new GridLayout(1, 5));
@@ -64,9 +65,10 @@ public class EvaluationPanel extends JPanel {
             }
         });
 
-        add(new JScrollPane(exerciseArea), BorderLayout.CENTER);
-        add(answersPanel, BorderLayout.NORTH);
+        add(new JScrollPane(exerciseArea), BorderLayout.NORTH);
+
         add(nextButton, BorderLayout.SOUTH);
+        add(answersPanel, BorderLayout.SOUTH);
     }
 
     private String getCurrentExercise() {
@@ -101,9 +103,10 @@ public class EvaluationPanel extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
+        if (fondo != null) {
+            g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 }
