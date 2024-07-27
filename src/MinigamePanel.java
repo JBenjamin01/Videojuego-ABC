@@ -106,13 +106,12 @@ public class MinigamePanel extends JPanel {
     private void checkAnswer(String vowel) {
         String exerciseText = exerciseArea.getText();
         String correctAnswer = exercises.get(getCurrentExercise());
-
-        if (correctAnswer != null && correctAnswer.contains(vowel)) {
-            // Update the exercise text with the selected vowel
-            exerciseText = exerciseText.replaceFirst("_", vowel);
+    
+        int underscoreIndex = exerciseText.indexOf('_');
+        if (underscoreIndex != -1 && correctAnswer.charAt(underscoreIndex) == vowel.charAt(0)) {
+            exerciseText = exerciseText.substring(0, underscoreIndex) + vowel + exerciseText.substring(underscoreIndex + 1);
             exerciseArea.setText(exerciseText);
-
-            // Check if the exercise is complete
+    
             if (!exerciseText.contains("_")) {
                 JOptionPane.showMessageDialog(this, "Correcto! Vamos al siguiente.");
                 correctAnswers++; // Incrementar respuestas correctas
