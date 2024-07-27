@@ -12,10 +12,11 @@ public class EvaluationPanel extends JPanel {
     private int exerciseIndex = 0;
 
     public EvaluationPanel(Game game) {
-        // Añado la imagen
-        fondo = new ImageIcon(getClass().getResource("imagenes/fondo.jpg")).getImage();
+        // Añadir la imagen de fondo
+        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
 
         setLayout(new BorderLayout());
+        setOpaque(false); // Hacer el panel principal transparente para ver el fondo
 
         // Inicializar los ejercicios
         exercises = new HashMap<>();
@@ -32,9 +33,14 @@ public class EvaluationPanel extends JPanel {
 
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
-        exerciseArea.setFont(new Font("Serif", Font.PLAIN, 18));
+        exerciseArea.setFont(new Font("Serif", Font.PLAIN, 24));
         exerciseArea.setText(getCurrentExercise());
+        exerciseArea.setHorizontalAlignment(SwingConstants.CENTER); // Centrar el texto
 
+        // Panel para centrar el área de ejercicios y los botones
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setOpaque(false); // Hacer transparente el panel
+        contentPanel.add(exerciseArea, BorderLayout.NORTH);
 
         // Panel para botones de respuestas
         JPanel answersPanel = new JPanel(new GridLayout(1, 5));
@@ -49,6 +55,7 @@ public class EvaluationPanel extends JPanel {
             });
             answersPanel.add(vowelButton);
         }
+        answersPanel.setOpaque(false); // Hacer transparente el panel de respuestas
 
         // Botón para pasar al siguiente ejercicio
         JButton nextButton = new JButton("Siguiente Ejercicio");
@@ -64,11 +71,13 @@ public class EvaluationPanel extends JPanel {
                 }
             }
         });
+        nextButton.setOpaque(false); // Hacer el botón transparente
 
-        add(new JScrollPane(exerciseArea), BorderLayout.NORTH);
+        // Añadir el panel de contenido al panel principal
+        contentPanel.add(answersPanel, BorderLayout.CENTER);
 
+        add(contentPanel, BorderLayout.NORTH);
         add(nextButton, BorderLayout.SOUTH);
-        add(answersPanel, BorderLayout.SOUTH);
     }
 
     private String getCurrentExercise() {
@@ -106,6 +115,7 @@ public class EvaluationPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (fondo != null) {
+            // Dibuja la imagen de fondo sólo si está disponible
             g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
         }
     }
