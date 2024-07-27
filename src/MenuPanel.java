@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.awt.Color;
+
 
 public class MenuPanel extends JPanel {
 
