@@ -90,7 +90,7 @@ public class EvaluationPanel extends JPanel {
 
         // Inicializar las imágenes de los ejercicios
         exerciseImages = new HashMap<>();
-        exerciseImages.put("_RROZ", "/imagenes/arroz.png");
+        exerciseImages.put("_RROZ", "/imagenes/arroz.png"); //Archivos png
         exerciseImages.put("_LA", "/imagenes/ala.jpg");
         exerciseImages.put("_VE", "/imagenes/ave.jpg");
         exerciseImages.put("_RO", "/imagenes/aro.jpg");
@@ -134,13 +134,13 @@ public class EvaluationPanel extends JPanel {
         exerciseImages.put("_RUGA", "/imagenes/oruga.jpg");
         exerciseImages.put("_STRA", "/imagenes/ostra.jpg");
 
-        exerciseImages.put("_VA", "/imagenes/uva.jpg");
+        exerciseImages.put("_VA", "/imagenes/uva.png");
         exerciseImages.put("_NO", "/imagenes/uno.jpg");
         exerciseImages.put("_ÑA", "/imagenes/una.jpg");
         exerciseImages.put("_NICORNIO", "/imagenes/unicornio.jpg");
         exerciseImages.put("_RRACA", "/imagenes/urraca.jpg");
         exerciseImages.put("_KELELE", "/imagenes/ukelele.jpg");
-        exerciseImages.put("_NIFORME", "/imagenes/uniforme.jpg");
+        exerciseImages.put("_NIFORME", "/imagenes/uniforme.png");
         exerciseImages.put("_TENSILIOS", "/imagenes/utensilio.jpg");
         exerciseImages.put("_NIVERSO", "/imagenes/universo.jpg");
         exerciseImages.put("_RNA", "/imagenes/urna.jpg");
