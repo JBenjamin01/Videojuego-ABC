@@ -84,7 +84,7 @@ public class EvaluationPanel extends JPanel {
         exercises.put("_RRACA", "URRACA");
         exercises.put("_KELELE", "UKELELE");
         exercises.put("_NIFORME", "UNIFORME");
-        exercises.put("_TENSILIO", "UTENSILIO");
+        exercises.put("_TENSILIOS", "UTENSILIOS");
         exercises.put("_NIVERSO", "UNIVERSO");
         exercises.put("_RNA", "URNA");
 
@@ -141,7 +141,7 @@ public class EvaluationPanel extends JPanel {
         exerciseImages.put("_RRACA", "/imagenes/urraca.jpg");
         exerciseImages.put("_KELELE", "/imagenes/ukelele.jpg");
         exerciseImages.put("_NIFORME", "/imagenes/uniforme.jpg");
-        exerciseImages.put("_TENSILIO", "/imagenes/utensilio.jpg");
+        exerciseImages.put("_TENSILIOS", "/imagenes/utensilio.jpg");
         exerciseImages.put("_NIVERSO", "/imagenes/universo.jpg");
         exerciseImages.put("_RNA", "/imagenes/urna.jpg");
 
