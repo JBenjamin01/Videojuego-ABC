@@ -8,6 +8,8 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.Font;
+import java.io.File;
 
 
 public class MenuPanel extends JPanel {
@@ -26,8 +28,10 @@ public class MenuPanel extends JPanel {
 
         //boton de inicio
         JButton startButton = new JButton("Start Game");
-        startButton.setBackground(new Color(255, 220, 180));
+        startButton.setBackground(new Color(255, 200, 0));
         startButton.setForeground(Color.WHITE);
+        startButton.setFont(new Font("Arial", Font.BOLD, 24));
+        startButton.setPreferredSize(new java.awt.Dimension(200, 80));
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 game.showPanel("CharacterSelection");
