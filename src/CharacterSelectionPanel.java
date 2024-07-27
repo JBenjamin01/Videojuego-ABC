@@ -5,48 +5,42 @@ import java.awt.event.ActionListener;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.io.IOException;
 
 public class CharacterSelectionPanel extends JPanel {
     private Image fondo;
 
     public CharacterSelectionPanel(Game game) {
-        // Añado la imagen de fondo
+        
         fondo = new ImageIcon(getClass().getResource("imagenes/fondo.jpg")).getImage();
 
-        // Botón para el primer personaje
-        JButton characterButton1 = new JButton(new ImageIcon(getClass().getResource("imagenes/Figura1.png")));
-        characterButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game.selectCharacter("Figura1");
-            }
-        });
-        this.add(characterButton1);
+        // botones de personaje
+        try {
+            this.add(createCharacterButton(game, "imagenes/stitch.png", "Stitch"));
+            this.add(createCharacterButton(game, "imagenes/pooh.png", "Pooh"));
+            this.add(createCharacterButton(game, "imagenes/dalmata.png", "Dalmata"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        // Botón para el segundo personaje
-        JButton characterButton2 = new JButton(new ImageIcon(getClass().getResource("imagenes/Figura2.png")));
-        characterButton2.addActionListener(new ActionListener() {
+    private JButton createCharacterButton(Game game, String imagePath, String characterName) throws IOException {
+        ImageIcon icon = new ImageIcon(imagePath);
+        Image image = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH); // tamaño de la imagen 
+        JButton button = new JButton(new ImageIcon(image));
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.selectCharacter("Figura2");
+                game.selectCharacter(characterName);
             }
         });
-        this.add(characterButton2);
-
-        // Botón para el tercer personaje
-        JButton characterButton3 = new JButton(new ImageIcon(getClass().getResource("imagenes/Figura3.png")));
-        characterButton3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game.selectCharacter("Figura3");
-            }
-        });
-        this.add(characterButton3);
+        return button;
     }
 
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
     }
 }
+
