@@ -103,6 +103,7 @@ public class EvaluationPanel extends JPanel {
 
         // Panel para botones de respuestas
         JPanel answersPanel = new JPanel(new GridLayout(1, 5));
+        answersPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
         String[] vowels = {"A", "E", "I", "O", "U"};
         for (String vowel : vowels) {
             JButton vowelButton = new JButton(vowel);
@@ -127,7 +128,7 @@ public class EvaluationPanel extends JPanel {
                     exerciseArea.setText(getCurrentExercise());
                 } else {
                     JOptionPane.showMessageDialog(EvaluationPanel.this, "Congratulations! You've completed the evaluation.");
-                    game.showPanel("Menu");
+                    game.showPanel("MinigamePanel");
                 }
             }
         });
