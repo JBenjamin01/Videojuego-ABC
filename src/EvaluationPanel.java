@@ -1,22 +1,37 @@
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class EvaluationPanel extends JPanel {
     private Image fondo;
     private JLabel exerciseArea;
     private Map<String, String> exercises;
+    private Map<String, String> vowelSounds;
     private int exerciseIndex = 0;
 
     public EvaluationPanel(Game game) {
         // Añadir la imagen de fondo
         fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
 
+        vowelSounds = new LinkedHashMap<>();
+        vowelSounds.put("A", "sounds/a.wav");
+        vowelSounds.put("E", "sounds/e.wav");
+        vowelSounds.put("I", "sounds/i.wav");
+        vowelSounds.put("O", "sounds/o.wav");
+        vowelSounds.put("U", "sounds/u.wav");
+
         setLayout(new BorderLayout());
-        setOpaque(false); // Hacer el panel principal transparente para ver el fondo
 
         // Inicializar los ejercicios
         exercises = new HashMap<>();
@@ -37,7 +52,7 @@ public class EvaluationPanel extends JPanel {
         exerciseArea.setText(getCurrentExercise());
         exerciseArea.setHorizontalAlignment(SwingConstants.CENTER); // Centrar el texto
 
-        // Panel para centrar el área de ejercicios y los botones
+        // Panel para abordar el área de ejercicios y los botones
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setOpaque(false); // Hacer transparente el panel
         contentPanel.add(exerciseArea, BorderLayout.NORTH);
@@ -50,6 +65,7 @@ public class EvaluationPanel extends JPanel {
             vowelButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    playSound(vowelSounds.get(vowel));
                     checkAnswer(vowel);
                 }
             });
@@ -108,6 +124,18 @@ public class EvaluationPanel extends JPanel {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Incorrecto! Intentalo de nuevo.");
+        }
+    }
+
+    private void playSound(String soundFile) {
+        try {
+            File audioFile = new File(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            ex.printStackTrace();
         }
     }
 
