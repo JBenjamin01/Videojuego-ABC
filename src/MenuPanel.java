@@ -16,6 +16,8 @@ public class MenuPanel extends JPanel {
 
         //Creando el boton de inicio
         JButton startButton = new JButton("Start Game");
+        startButton.setBackground(new Color(35, 144, 137));
+        startButton.setForeground(Color.WHITE);
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 game.showPanel("CharacterSelection");
