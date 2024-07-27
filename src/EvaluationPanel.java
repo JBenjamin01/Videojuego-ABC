@@ -19,9 +19,16 @@ public class EvaluationPanel extends JPanel {
 
         // Inicializar los ejercicios
         exercises = new HashMap<>();
-        exercises.put("Completa la palabra: _ppl_", "APPLE");
-        exercises.put("Completa las vocales perdidas: _ _ _", "OUI");
-        exercises.put("Escoge la vocal correcta: f_ll", "FILL");
+        exercises.put("G_T_", "GATO");
+        exercises.put("C_S_", "CASA");
+        exercises.put("S_P_", "SAPO");
+        exercises.put("P_P_", "PAPA");
+        exercises.put("M_S_", "MESA");
+        exercises.put("P_Z", "PEZ");
+        exercises.put("V_L_", "VELA");
+        exercises.put("P_R_", "PERA");        
+        exercises.put("L_BR_", "LIBRO");
+        exercises.put("_SL_", "ISLA");
 
         // Área para mostrar los ejercicios
         exerciseArea = new JTextArea(1, 2);
