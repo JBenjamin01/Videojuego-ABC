@@ -48,7 +48,7 @@ public class VowelLearningPanel extends JPanel {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.showPanel("CharacterSelection");
+                game.showPanel("Evaluation");
             }
         });
 

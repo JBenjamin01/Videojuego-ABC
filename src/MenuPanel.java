@@ -12,7 +12,7 @@ public class MenuPanel extends JPanel {
 
     public MenuPanel(Game game) {
         //Añado la imagen
-        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+        fondo = new ImageIcon(getClass().getResource("imagenes/fondo.jpg")).getImage();
 
         //Creando el boton de inicio
         JButton startButton = new JButton("Start Game");
