@@ -6,11 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EvaluationPanel extends JPanel {
+    private Image fondo;
     private JTextArea exerciseArea;
     private Map<String, String> exercises;
     private int exerciseIndex = 0;
 
     public EvaluationPanel(Game game) {
+        //Añado la imagen
+        fondo = new ImageIcon(getClass().getResource("imagenes/fondo.jpg")).getImage();
+
         setLayout(new BorderLayout());
 
         // Inicializar los ejercicios
@@ -88,5 +92,12 @@ public class EvaluationPanel extends JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Incorrecto! Intentalo de nuevo.");
         }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g){
+        super.paintComponent(g);
+
+        g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
     }
 }
