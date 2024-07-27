@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class EvaluationPanel extends JPanel {
     private Image fondo;
-    private JTextArea exerciseArea;
+    private JLabel exerciseArea;
     private Map<String, String> exercises;
     private int exerciseIndex = 0;
 
@@ -31,8 +31,7 @@ public class EvaluationPanel extends JPanel {
         exercises.put("_SL_", "ISLA");
 
         // Área para mostrar los ejercicios
-        exerciseArea = new JTextArea(1, 2);
-        exerciseArea.setEditable(false);
+        exerciseArea = new JLabel();
         exerciseArea.setFont(new Font("Serif", Font.PLAIN, 18));
         exerciseArea.setText(getCurrentExercise());
 
