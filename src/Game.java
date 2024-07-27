@@ -15,6 +15,7 @@ public class Game extends JFrame {
         mainPanel.add(new CharacterSelectionPanel(this), "CharacterSelection");
         mainPanel.add(new VowelLearningPanel(this), "VowelLearning");
         mainPanel.add(new EvaluationPanel(this), "Evaluation");
+        mainPanel.add(new MinigamePanel(this), "MinigamePanel"); 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
