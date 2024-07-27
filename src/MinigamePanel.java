@@ -51,7 +51,7 @@ public class MinigamePanel extends JPanel {
         exercises.put("_MOR", "AMOR");
         exercises.put("_ZUL", "AZUL");
 
-        exercises.put("_LEFANTE", "ELEfANTE");
+        exercises.put("_LEFANTE", "ELEFANTE");
         exercises.put("_SPEJO", "ESPEJO");
         exercises.put("_STRELLA", "ESTRELLA");
         exercises.put("_SCALERA", "ESCALERA");
@@ -74,7 +74,8 @@ public class MinigamePanel extends JPanel {
         contentPanel.add(exerciseArea, BorderLayout.NORTH);
 
         // Panel para botones de respuestas
-        JPanel answersPanel = new JPanel(new GridLayout(1, 5));
+        JPanel answersPanel = new JPanel(new GridLayout(1, 5, 10, 10)); // Espacio entre botones
+        answersPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Espacio alrededor del panel
         String[] vowels = {"A", "E", "I", "O", "U"};
         for (String vowel : vowels) {
             JButton vowelButton = new JButton(vowel);
@@ -89,26 +90,10 @@ public class MinigamePanel extends JPanel {
         }
         answersPanel.setOpaque(false); // Hacer transparente el panel de respuestas
 
-        // Botón para pasar al siguiente ejercicio
-        JButton nextButton = new JButton("Siguiente Ejercicio");
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                exerciseIndex++;
-                if (exerciseIndex < exercises.size()) {
-                    exerciseArea.setText(getCurrentExercise());
-                } else {
-                    showResults();
-                }
-            }
-        });
-        nextButton.setOpaque(false); // Hacer el botón transparente
-
         // Añadir el panel de contenido al panel principal
         contentPanel.add(answersPanel, BorderLayout.CENTER);
 
-        add(contentPanel, BorderLayout.NORTH);
-        add(nextButton, BorderLayout.SOUTH);
+        add(contentPanel, BorderLayout.CENTER);
     }
 
     private String getCurrentExercise() {
@@ -131,16 +116,21 @@ public class MinigamePanel extends JPanel {
             if (!exerciseText.contains("_")) {
                 JOptionPane.showMessageDialog(this, "Correcto! Vamos al siguiente.");
                 correctAnswers++; // Incrementar respuestas correctas
-                exerciseIndex++;
-                if (exerciseIndex < exercises.size()) {
-                    exerciseArea.setText(getCurrentExercise());
-                } else {
-                    showResults();
-                }
+                nextExercise();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Incorrecto! Intentalo de nuevo.");
+            JOptionPane.showMessageDialog(this, "Incorrecto! Pasando al siguiente.");
             incorrectAnswers++; // Incrementar respuestas incorrectas
+            nextExercise();
+        }
+    }
+
+    private void nextExercise() {
+        exerciseIndex++;
+        if (exerciseIndex < exercises.size()) {
+            exerciseArea.setText(getCurrentExercise());
+        } else {
+            showResults();
         }
     }
 
