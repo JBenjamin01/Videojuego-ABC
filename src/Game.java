@@ -27,6 +27,17 @@ public class Game extends JFrame {
         cardLayout.show(mainPanel, panelName);
     }
 
+    public void selectCharacter(String characterName) {
+        // Almacenar el personaje seleccionado
+        this.selectedCharacter = characterName;
+        System.out.println("Personaje seleccionado: " + characterName);
+        showPanel("VowelLearning");
+    }
+
+    public String getSelectedCharacter() {
+        return selectedCharacter;
+    }
+
     public static void main(String[] args) {
         new Game();
     }
