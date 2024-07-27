@@ -213,7 +213,9 @@ public class EvaluationPanel extends JPanel {
         String currentExercise = getCurrentExercise();
         String imagePath = exerciseImages.get(currentExercise);
         if (imagePath != null) {
-            imageLabel.setIcon(new ImageIcon(getClass().getResource(imagePath)));
+            ImageIcon originalIcon = new ImageIcon(getClass().getResource(imagePath));
+            Image scaledImage = originalIcon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(scaledImage));
         } else {
             imageLabel.setIcon(null);
         }
