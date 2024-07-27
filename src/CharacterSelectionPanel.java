@@ -14,7 +14,7 @@ public class CharacterSelectionPanel extends JPanel {
         fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
 
         // Crear y añadir los botones de personaje con imágenes redimensionadas
-        this.add(createCharacterButton(game, "imagenes/stitch.com (2).png", "Stitch"));
+        this.add(createCharacterButton(game, "imagenes/stitch.png", "Stitch"));
         this.add(createCharacterButton(game, "imagenes/pooh.png", "Pooh"));
         this.add(createCharacterButton(game, "imagenes/dalmata.png", "Dalmata"));
     }
