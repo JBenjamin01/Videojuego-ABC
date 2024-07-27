@@ -1,8 +1,4 @@
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +12,9 @@ import java.util.Map;
 public class EvaluationPanel extends JPanel {
     private Image fondo;
     private JLabel exerciseArea;
+    private JLabel imageLabel; // Nuevo JLabel para la imagen
     private Map<String, String> exercises;
+    private Map<String, String> exerciseImages; // Mapa para las imágenes de los ejercicios
     private Map<String, String> vowelSounds;
     private int exerciseIndex = 0;
 
@@ -61,7 +59,7 @@ public class EvaluationPanel extends JPanel {
         exercises.put("_GLESIA", "IGLESIA");
         exercises.put("_ZQUIERDA", "IZQUIERDA");
         exercises.put("_GLÚ", "IGLÚ");
-        exercises.put("_NSTRUMENTO", "INSTRUMENTO");
+        exercises.put("_NSTRUMENTOS", "INSTRUMENTOS");
         exercises.put("_NCENDIO", "INCENDIO");
         exercises.put("_MPRESORA", "IMPRESORA");
         exercises.put("_NVIERNO", "INVIERNO");
@@ -90,20 +88,82 @@ public class EvaluationPanel extends JPanel {
         exercises.put("_NIVERSO", "UNIVERSO");
         exercises.put("_RNA", "URNA");
 
+        // Inicializar las imágenes de los ejercicios
+        exerciseImages = new HashMap<>();
+        exerciseImages.put("_RROZ", "/imagenes/arroz.png");
+        exerciseImages.put("_LA", "/imagenes/ala.jpg");
+        exerciseImages.put("_VE", "/imagenes/ave.jpg");
+        exerciseImages.put("_RO", "/imagenes/aro.jpg");
+        exerciseImages.put("_BEJA", "/imagenes/abeja.jpg");
+        exerciseImages.put("_GUA", "/imagenes/agua.jpg");
+        exerciseImages.put("_NCLA", "/imagenes/ancla.jpg");
+        exerciseImages.put("_RAÑA", "/imagenes/araña.jpg");
+        exerciseImages.put("_MOR", "/imagenes/amor.jpg");
+        exerciseImages.put("_ZUL", "/imagenes/azul.png");
+
+        exerciseImages.put("_LEFANTE", "/imagenes/elefante.jpg");
+        exerciseImages.put("_SPEJO", "/imagenes/espejo.jpg");
+        exerciseImages.put("_STRELLA", "/imagenes/estrella.jpg");
+        exerciseImages.put("_SCALERA", "/imagenes/escalera.jpg");
+        exerciseImages.put("_SCUDO", "/imagenes/escudo.jpg");
+        exerciseImages.put("_SCUELA", "/imagenes/escuela.png");
+        exerciseImages.put("_SCOBA", "/imagenes/escoba.png");
+        exerciseImages.put("_NANO", "/imagenes/enano.jpg");
+        exerciseImages.put("_STATUA", "/imagenes/estatua.jpg");
+        exerciseImages.put("_SPONJA", "/imagenes/esponja.jpg");
+
+        exerciseImages.put("_SLA", "/imagenes/isla.jpg");
+        exerciseImages.put("_GLESIA", "/imagenes/iglesia.jpg");
+        exerciseImages.put("_ZQUIERDA", "/imagenes/izquierda.png");
+        exerciseImages.put("_GLÚ", "/imagenes/iglu.jpg");
+        exerciseImages.put("_NSTRUMENTOS", "/imagenes/instrumentos.png");
+        exerciseImages.put("_NCENDIO", "/imagenes/incendio.jpg");
+        exerciseImages.put("_MPRESORA", "/imagenes/impresora.jpg");
+        exerciseImages.put("_NVIERNO", "/imagenes/invierno.jpg");
+        exerciseImages.put("_MÁN", "/imagenes/iman.jpg");  
+        exerciseImages.put("_GUANA", "/imagenes/iguana.jpg");
+
+        exerciseImages.put("_SO", "/imagenes/oso.jpg");
+        exerciseImages.put("_RO", "/imagenes/oro.jpg");
+        exerciseImages.put("_REJA", "/imagenes/oreja.jpg");
+        exerciseImages.put("_LA", "/imagenes/ola.jpg");
+        exerciseImages.put("_JO", "/imagenes/ojo.jpg");
+        exerciseImages.put("_VEJA", "/imagenes/oveja.jpg");
+        exerciseImages.put("_CHO", "/imagenes/ocho.jpg");
+        exerciseImages.put("_LLA", "/imagenes/olla.jpg");
+        exerciseImages.put("_RUGA", "/imagenes/oruga.jpg");
+        exerciseImages.put("_STRA", "/imagenes/ostra.jpg");
+
+        exerciseImages.put("_VA", "/imagenes/uva.jpg");
+        exerciseImages.put("_NO", "/imagenes/uno.jpg");
+        exerciseImages.put("_ÑA", "/imagenes/una.jpg");
+        exerciseImages.put("_NICORNIO", "/imagenes/unicornio.jpg");
+        exerciseImages.put("_RRACA", "/imagenes/urraca.jpg");
+        exerciseImages.put("_KELELE", "/imagenes/ukelele.jpg");
+        exerciseImages.put("_NIFORME", "/imagenes/uniforme.jpg");
+        exerciseImages.put("_TENSILIO", "/imagenes/utensilio.jpg");
+        exerciseImages.put("_NIVERSO", "/imagenes/universo.jpg");
+        exerciseImages.put("_RNA", "/imagenes/urna.jpg");
+
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
         exerciseArea.setFont(new Font("Serif", Font.PLAIN, 24));
         exerciseArea.setText(getCurrentExercise());
         exerciseArea.setHorizontalAlignment(SwingConstants.CENTER); // Centrar el texto
 
+        // Área para mostrar la imagen del ejercicio
+        imageLabel = new JLabel();
+        updateImage(); // Actualizar la imagen según el ejercicio actual
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
         // Panel para abordar el área de ejercicios y los botones
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setOpaque(false); // Hacer transparente el panel
         contentPanel.add(exerciseArea, BorderLayout.NORTH);
+        contentPanel.add(imageLabel, BorderLayout.CENTER); // Añadir el JLabel de la imagen
 
         // Panel para botones de respuestas
         JPanel answersPanel = new JPanel(new GridLayout(1, 5));
-        answersPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
         String[] vowels = {"A", "E", "I", "O", "U"};
         for (String vowel : vowels) {
             JButton vowelButton = new JButton(vowel);
@@ -126,18 +186,19 @@ public class EvaluationPanel extends JPanel {
                 exerciseIndex++;
                 if (exerciseIndex < exercises.size()) {
                     exerciseArea.setText(getCurrentExercise());
+                    updateImage(); // Actualizar la imagen según el nuevo ejercicio
                 } else {
-                    JOptionPane.showMessageDialog(EvaluationPanel.this, "Congratulations! You've completed the evaluation.");
-                    game.showPanel("MinigamePanel");
+                    JOptionPane.showMessageDialog(EvaluationPanel.this, "Felicidades! Completaste la evaluación.");
+                    game.showPanel("Menu");
                 }
             }
         });
         nextButton.setOpaque(false); // Hacer el botón transparente
 
         // Añadir el panel de contenido al panel principal
-        contentPanel.add(answersPanel, BorderLayout.CENTER);
+        contentPanel.add(answersPanel, BorderLayout.SOUTH);
 
-        add(contentPanel, BorderLayout.NORTH);
+        add(contentPanel, BorderLayout.CENTER);
         add(nextButton, BorderLayout.SOUTH);
     }
 
@@ -146,6 +207,16 @@ public class EvaluationPanel extends JPanel {
             return "No exercises available.";
         }
         return (String) exercises.keySet().toArray()[exerciseIndex];
+    }
+
+    private void updateImage() {
+        String currentExercise = getCurrentExercise();
+        String imagePath = exerciseImages.get(currentExercise);
+        if (imagePath != null) {
+            imageLabel.setIcon(new ImageIcon(getClass().getResource(imagePath)));
+        } else {
+            imageLabel.setIcon(null);
+        }
     }
 
     private void checkAnswer(String vowel) {
@@ -163,6 +234,7 @@ public class EvaluationPanel extends JPanel {
                 exerciseIndex++;
                 if (exerciseIndex < exercises.size()) {
                     exerciseArea.setText(getCurrentExercise());
+                    updateImage(); // Actualizar la imagen según el nuevo ejercicio
                 } else {
                     JOptionPane.showMessageDialog(this, "Felicidades! Completaste la evaluación.");
                 }
