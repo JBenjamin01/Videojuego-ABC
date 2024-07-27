@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 
 public class MenuPanel extends JPanel {
@@ -13,10 +15,16 @@ public class MenuPanel extends JPanel {
     private Image fondo;
 
     public MenuPanel(Game game) {
-        //Añado la imagen
+        
         fondo = new ImageIcon(getClass().getResource("imagenes/fondo.jpg")).getImage();
 
-        //Creando el boton de inicio
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+
+        //boton de inicio
         JButton startButton = new JButton("Start Game");
         startButton.setBackground(new Color(255, 220, 180));
         startButton.setForeground(Color.WHITE);
