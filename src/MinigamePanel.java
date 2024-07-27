@@ -62,39 +62,6 @@ public class MinigamePanel extends JPanel {
         exercises.put("_STATUA", "ESTATUA");
         exercises.put("_SPONJA", "ESPONJA");
 
-        exercises.put("_SLA", "ISLA");
-        exercises.put("_GLESIA", "IGLESIA");
-        exercises.put("_ZQUIERDA", "IZQUIERDA");
-        exercises.put("_GLÚ", "IGLÚ");
-        exercises.put("_NSTRUMENTO", "INSTRUMENTO");
-        exercises.put("_NCENDIO", "INCENDIO");
-        exercises.put("_MPRESORA", "IMPRESORA");
-        exercises.put("_NVIERNO", "INVIERNO");
-        exercises.put("_MÁN", "IMÁN");
-        exercises.put("_GUANA", "IGUANA");
-
-        exercises.put("_SO", "OSO");
-        exercises.put("_RO", "ORO");
-        exercises.put("_REJA", "OREJA");
-        exercises.put("_LA", "OLA");
-        exercises.put("_JO", "OJO");
-        exercises.put("_VEJA", "OVEJA");
-        exercises.put("_CHO", "OCHO");
-        exercises.put("_LLA", "OLLA");
-        exercises.put("_RUGA", "ORUGA");
-        exercises.put("_STRA", "OSTRA");
-
-        exercises.put("_VA", "UVA");
-        exercises.put("_NO", "UNO");
-        exercises.put("_ÑA", "UÑA");
-        exercises.put("_NICORNIO", "UNICORNIO");
-        exercises.put("_RRACA", "URRACA");
-        exercises.put("_KELELE", "UKELELE");
-        exercises.put("_NIFORME", "UNIFORME");
-        exercises.put("_TENSILIO", "UTENSILIO");
-        exercises.put("_NIVERSO", "UNIVERSO");
-        exercises.put("_RNA", "URNA");
-
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
         exerciseArea.setFont(new Font("Serif", Font.PLAIN, 24));
@@ -132,7 +99,6 @@ public class MinigamePanel extends JPanel {
                     exerciseArea.setText(getCurrentExercise());
                 } else {
                     showResults();
-                    game.showPanel("Evaluation"); // Mostrar el panel de evaluación después del minijuego
                 }
             }
         });

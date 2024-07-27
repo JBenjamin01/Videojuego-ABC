@@ -189,7 +189,7 @@ public class EvaluationPanel extends JPanel {
                     updateImage(); // Actualizar la imagen según el nuevo ejercicio
                 } else {
                     JOptionPane.showMessageDialog(EvaluationPanel.this, "Felicidades! Completaste la evaluación.");
-                    game.showPanel("Menu");
+                    game.showPanel("Minigame");
                 }
             }
         });
