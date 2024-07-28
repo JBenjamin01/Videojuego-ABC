@@ -1,14 +1,10 @@
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.datatransfer.*;
-import java.awt.dnd.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MinigameDragPanel extends JPanel {
     private MinigamesPanel parentPanel; // Referencia al panel de minijuegos
@@ -55,7 +51,9 @@ public class MinigameDragPanel extends JPanel {
             gridPanel.add(gridLabel);
         }
 
-        String[] vowels = {"A", "E", "I", "O", "U"};
+        java.util.List<String> vowels = Arrays.asList("A", "E", "I", "O", "U");
+        Collections.shuffle(vowels);
+
         for (String vowel : vowels) {
             JLabel dragLabel = new JLabel(vowel, SwingConstants.CENTER);
             dragLabel.setFont(new Font("Serif", Font.BOLD, 24));
