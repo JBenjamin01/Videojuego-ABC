@@ -9,7 +9,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-import java.io.File;
 
 public class MinigameDragPanel extends JPanel {
     private MinigamesPanel parentPanel; // Referencia al panel de minijuegos
@@ -32,6 +31,18 @@ public class MinigameDragPanel extends JPanel {
         vowelSounds.put("U", "sounds/u.wav");
 
         setLayout(new BorderLayout());
+
+        JButton soundButton = new JButton("Primer ejercicio");
+        soundButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playSound("sounds/Primer-mini-juego.wav");
+            }
+        });
+
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        topPanel.setOpaque(false);
+        topPanel.add(soundButton);
 
         // Contenedor vertical para evitar el estiramiento vertical de los paneles
         JPanel verticalContainer = new JPanel();
@@ -114,6 +125,7 @@ public class MinigameDragPanel extends JPanel {
         verticalContainer.add(gridPanelContainer);
         verticalContainer.add(Box.createVerticalGlue());
 
+        add(topPanel, BorderLayout.NORTH); // Agregar el panel superior con el botón de sonido
         add(verticalContainer, BorderLayout.CENTER);
         
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
