@@ -1,0 +1,41 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class MinigamesPanel extends JPanel {
+    private CardLayout cardLayout;
+    private JPanel minigameContainer;
+    private Game game;
+
+    public MinigamesPanel(Game game) {
+        this.game = game;
+        cardLayout = new CardLayout();
+        minigameContainer = new JPanel(cardLayout);
+
+        // Agregar paneles de minijuegos
+        minigameContainer.add(new MinigameCompletePanel(this), "Complete");
+        minigameContainer.add(new MinigameDragPanel(this), "Drag");
+
+
+        setLayout(new BorderLayout());
+        add(minigameContainer, BorderLayout.CENTER);
+
+        // Mostrar el primer minijuego
+        showMinigame("Complete");
+    }
+
+    public void showMinigame(String minigameName) {
+        cardLayout.show(minigameContainer, minigameName);
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Minigames");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.add(new MinigamesPanel(null)); // Pasar la referencia del juego real en lugar de null
+        frame.setVisible(true);
+    }
+}
