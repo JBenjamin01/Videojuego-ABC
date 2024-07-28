@@ -225,8 +225,15 @@ public class EvaluationPanel extends JPanel {
         }
         answersPanel.setOpaque(false); // Hacer transparente el panel de respuestas
 
-        // Botón para pasar al siguiente ejercicio
-        JButton nextButton = new JButton("Siguiente Ejercicio");
+        // Cargar la imagen para el botón "Siguiente Ejercicio"
+        ImageIcon nextIcon = new ImageIcon(getClass().getResource("/imagenes/siguiente.png"));
+        Image nextImage = nextIcon.getImage().getScaledInstance(120, 60, Image.SCALE_SMOOTH);
+        JButton nextButton = new JButton(new ImageIcon(nextImage));
+        nextButton.setOpaque(false);
+        nextButton.setContentAreaFilled(false);
+        nextButton.setBorderPainted(false);
+
+        // Acción para el botón "Siguiente Ejercicio"
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -240,13 +247,17 @@ public class EvaluationPanel extends JPanel {
                 }
             }
         });
-        nextButton.setOpaque(false); // Hacer el botón transparente
+
+        // Panel para el botón "Siguiente Ejercicio" en la esquina superior derecha
+        JPanel topRightPanel = new JPanel(new BorderLayout());
+        topRightPanel.setOpaque(false); // Hacer transparente el panel
+        topRightPanel.add(nextButton, BorderLayout.EAST);
 
         // Añadir el panel de contenido al panel principal
         contentPanel.add(answersPanel, BorderLayout.SOUTH);
 
+        add(topRightPanel, BorderLayout.NORTH); // Añadir el panel en la parte superior
         add(contentPanel, BorderLayout.CENTER);
-        add(nextButton, BorderLayout.SOUTH);
     }
 
     private String getCurrentExercise() {
