@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EvaluationPanel extends JPanel {
-    private Image fondo;
+    private ImageIcon fondo;
     private JLabel exerciseArea;
     private JLabel imageLabel; // Nuevo JLabel para la imagen
     private Map<String, String> exercises;
@@ -19,7 +19,7 @@ public class EvaluationPanel extends JPanel {
 
     public EvaluationPanel(Game game) {
         // Añadir la imagen de fondo
-        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+        fondo = new ImageIcon(getClass().getResource("/imagenes/menu.gif"));
 
         completeWordSounds = new HashMap<>();
         completeWordSounds.put("ARROZ", "sounds/arroz.wav");
@@ -348,7 +348,7 @@ public class EvaluationPanel extends JPanel {
         super.paintComponent(g);
         if (fondo != null) {
             // Dibuja la imagen de fondo sólo si está disponible
-            g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
+            g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
         }
     }
 }

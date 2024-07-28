@@ -4,11 +4,11 @@ import java.awt.event.*;
 
 public class MenuPanel extends JPanel {
 
-    private Image fondo;
+    private ImageIcon fondo;
     private Image titulo;
 
     public MenuPanel(Game game) {
-        fondo = new ImageIcon(getClass().getResource("imagenes/fondo.jpg")).getImage();
+        fondo = new ImageIcon(getClass().getResource("imagenes/menu.gif"));
         titulo = new ImageIcon(getClass().getResource("imagenes/aeiou.png")).getImage();
 
         // Tamaño deseado para los botones
@@ -74,7 +74,7 @@ public class MenuPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
     }
 
     private ImageIcon createResizedIcon(String path, int width, int height) {
