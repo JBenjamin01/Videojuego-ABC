@@ -14,7 +14,7 @@ public class MinigameHighlightPanel extends JPanel {
     private MinigamesPanel parentPanel;
     private JLabel[] letterLabels;
     private Map<Character, String> vowelSounds;
-    private static final String[] WORDS = {"ELEFANTE", "UKELELE", "IGLESIA", "OVEJA", "ANILLO"};
+    private static final String[] WORDS = {"ELEFANTE", "UKELELE", "IGLESIA", "OSCURO", "ANILLO"};
     private int currentWordIndex = 0;
     private JButton nextButton;
 
@@ -32,7 +32,7 @@ public class MinigameHighlightPanel extends JPanel {
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(20, 20, 20, 20); // Espacio entre componentes
+        gbc.insets = new Insets(0, 0, 0, 0); // Espacio entre componentes
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -49,18 +49,21 @@ public class MinigameHighlightPanel extends JPanel {
         removeAll();
         String word = WORDS[currentWordIndex];
         letterLabels = new JLabel[word.length()];
-
+    
+        gbc.gridwidth = 1;
+        gbc.gridy = 0;
+    
         for (int i = 0; i < word.length(); i++) {
             letterLabels[i] = createLetterLabel(word.charAt(i));
             gbc.gridx = i;
             add(letterLabels[i], gbc);
         }
-
+    
         gbc.gridy = 1;
         gbc.gridx = 0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         add(nextButton, gbc);
-        
+    
         revalidate();
         repaint();
     }
