@@ -5,6 +5,11 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import java.io.File;
 
 public class MinigameDragPanel extends JPanel {
     private MinigamesPanel parentPanel; // Referencia al panel de minijuegos

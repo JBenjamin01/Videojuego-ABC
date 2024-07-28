@@ -108,7 +108,7 @@ public class MinigamePaintPanel extends JPanel {
         }
 
         nextLevelButton = new JButton("Siguiente Nivel");
-        nextLevelButton.setFont(new Font("Arial", Font.BOLD, 18));
+        nextLevelButton.setFont(new Font("Cooper Black", Font.BOLD, 18));
         nextLevelButton.addActionListener(e -> {
             if (isLevelCorrect()) {
                 feedbackLabel.setText("¡Correcto!");
@@ -127,15 +127,15 @@ public class MinigamePaintPanel extends JPanel {
 
         feedbackLabel = new JLabel("Haz clic en la cuadrícula para pintar las celdas.");
         feedbackLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        feedbackLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        feedbackLabel.setFont(new Font("Cooper Black", Font.PLAIN, 16));
 
-        titleLabel = new JLabel("Tercer minijuego: \"Colorea las vocales\"");
+        titleLabel = new JLabel("Segundo minijuego: \"Colorea las vocales\"");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setFont(new Font("Cooper Black", Font.BOLD, 24));
 
         subtitleLabel = new JLabel("Con ayuda de las imágenes pinta los cuadrados vacíos para dibujar las vocales");
         subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        subtitleLabel.setFont(new Font("Cooper Black", Font.PLAIN, 18));
 
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
