@@ -15,6 +15,10 @@ public class MenuPanel extends JPanel {
         int buttonWidth = 180;
         int buttonHeight = 80;
 
+        // Tamaño deseado para la imagen de título
+        int tituloWidth = 1000;  // Ajusta este valor al tamaño deseado
+        int tituloHeight = 500; // Ajusta este valor al tamaño deseado
+
         // Botón de inicio
         JButton startButton = new JButton(createResizedIcon("imagenes/iniciar.png", buttonWidth, buttonHeight));
         startButton.setBackground(new Color(0, 0, 0, 0));
@@ -47,13 +51,15 @@ public class MenuPanel extends JPanel {
                 System.exit(0);
             }
         });
+
         // Configuración del layout principal
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Espaciado alrededor de los componentes
 
-        // Configuración del JLabel de imagen
-        JLabel image = new JLabel(new ImageIcon(titulo));
+        // Configuración del JLabel de imagen con tamaño ajustado
+        ImageIcon resizedTituloIcon = createResizedIcon("imagenes/aeiou.png", tituloWidth, tituloHeight);
+        JLabel image = new JLabel(resizedTituloIcon);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
