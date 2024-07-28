@@ -10,7 +10,7 @@ public class MinigameHighlightPanel extends JPanel {
 
     public MinigameHighlightPanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel;
-        setLayout(new GridLayout(1, 0));
+        setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         String word = "ELEFANTE";
         letterLabels = new JLabel[word.length()];
@@ -74,7 +74,7 @@ public class MinigameHighlightPanel extends JPanel {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Minigame Highlight Panel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 200);
+        frame.setSize(800, 500); // Ajustar tamaño de la ventana
         frame.add(new MinigameHighlightPanel(null));
         frame.setVisible(true);
     }
