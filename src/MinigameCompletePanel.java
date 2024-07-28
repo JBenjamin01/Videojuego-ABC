@@ -121,7 +121,6 @@ public class MinigameCompletePanel extends JPanel {
             exerciseArea.setText(getCurrentExercise());
         } else {
             showResults();
-            parentPanel.showMinigame("Highlight");
         }
     }
 
@@ -138,6 +137,9 @@ public class MinigameCompletePanel extends JPanel {
     }
 
     private void showResults() {
+        ScoreManager.getInstance().increaseScore(correctAnswers);
+        System.out.println("SCORE HASTA AHORA:" + ScoreManager.getInstance().getScore());
+
         int totalExercises = correctAnswers + incorrectAnswers;
         double successRate = (correctAnswers / (double) totalExercises) * 100;
 
