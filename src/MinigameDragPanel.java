@@ -121,22 +121,17 @@ public class MinigameDragPanel extends JPanel {
 
     private void validateOrder() {
         String[] correctOrder = {"A", "E", "I", "O", "U"};
-        boolean isCorrect = true;
+        int score = 0;
+    
         for (int i = 0; i < correctOrder.length; i++) {
             JLabel label = gridLabels.get("label" + i);
-            if (label.getText().isEmpty() || !label.getText().equals(correctOrder[i])) {
-                isCorrect = false;
-                break;
+            if (!label.getText().isEmpty() && label.getText().equals(correctOrder[i])) {
+                score++;
             }
         }
-
-        if (isCorrect) {
-            JOptionPane.showMessageDialog(this, "¡Correcto! Las vocales están en el orden correcto.");
-            parentPanel.showMinigame("Paint");
-        } else {
-            JOptionPane.showMessageDialog(this, "Incorrecto.");
-            parentPanel.showMinigame("Paint");
-        }
+    
+        JOptionPane.showMessageDialog(this, "Puntuación: " + score + " puntos.");
+        parentPanel.showMinigame("Paint");
     }
 
     private void playSound(String soundFile) {
