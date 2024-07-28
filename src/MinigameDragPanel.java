@@ -58,12 +58,48 @@ public class MinigameDragPanel extends JPanel {
             dragPanel.add(dragLabel);
         }
 
+        // Botón de validación
+        JButton validateButton = new JButton("Validar Orden");
+        validateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                validateOrder();
+            }
+        });
+
         add(dragPanel, BorderLayout.NORTH);
         add(gridPanel, BorderLayout.CENTER);
+        add(validateButton, BorderLayout.SOUTH);
+    }
+
+    private void validateOrder() {
+        String[] correctOrder = {"A", "E", "I", "O", "U"};
+        boolean isCorrect = true;
+        for (int i = 0; i < correctOrder.length; i++) {
+            JLabel label = gridLabels.get("label" + i);
+            if (label.getText().isEmpty() || !label.getText().equals(correctOrder[i])) {
+                isCorrect = false;
+                break;
+            }
+        }
+
+        if (isCorrect) {
+            JOptionPane.showMessageDialog(this, "¡Correcto! Las vocales están en el orden correcto.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Incorrecto. Por favor, intenta nuevamente.");
+        }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Minigame Drag and Drop");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.add(new MinigameDragPanel(null)); // Pasar la referencia del panel de minijuegos real
+        frame.setVisible(true);
     }
 }

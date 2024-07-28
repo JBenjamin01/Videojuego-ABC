@@ -12,15 +12,13 @@ public class MinigamesPanel extends JPanel {
         minigameContainer = new JPanel(cardLayout);
 
         // Agregar paneles de minijuegos
-        minigameContainer.add(new MinigameCompletePanel(this), "Complete");
         minigameContainer.add(new MinigameDragPanel(this), "Drag");
-
+        minigameContainer.add(new MinigameCompletePanel(this), "Complete");
 
         setLayout(new BorderLayout());
         add(minigameContainer, BorderLayout.CENTER);
 
-        // Mostrar el primer minijuego
-        showMinigame("Complete");
+        showMinigame("Drag");
     }
 
     public void showMinigame(String minigameName) {
