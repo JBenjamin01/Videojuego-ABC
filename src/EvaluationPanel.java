@@ -233,6 +233,14 @@ public class EvaluationPanel extends JPanel {
         nextButton.setContentAreaFilled(false);
         nextButton.setBorderPainted(false);
 
+        // Cargar la imagen para el botón "Ejercicio Anterior"
+        ImageIcon returnIcon = new ImageIcon(getClass().getResource("/imagenes/atras.png"));
+        Image returnImage = returnIcon.getImage().getScaledInstance(120, 60, Image.SCALE_SMOOTH);
+        JButton returnButton = new JButton(new ImageIcon(returnImage));
+        returnButton.setOpaque(false);
+        returnButton.setContentAreaFilled(false);
+        returnButton.setBorderPainted(false);
+
         // Acción para el botón "Siguiente Ejercicio"
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -248,13 +256,30 @@ public class EvaluationPanel extends JPanel {
             }
         });
 
+        // Acción para el botón "Ejercicio Anterior"
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exerciseIndex--;
+                if (exerciseIndex < exercises.size()) {
+                    exerciseArea.setText(getCurrentExercise());
+                    updateImage(); // Actualizar la imagen según el nuevo ejercicio
+                } else {
+                    JOptionPane.showMessageDialog(EvaluationPanel.this, "Felicidades! Completaste la evaluación.");
+                    game.showPanel("Minigame");
+                }
+            }
+        });
+        
         // Panel para el botón "Siguiente Ejercicio" en la esquina superior derecha
         JPanel topRightPanel = new JPanel(new BorderLayout());
         topRightPanel.setOpaque(false); // Hacer transparente el panel
         topRightPanel.add(nextButton, BorderLayout.EAST);
+        topRightPanel.add(returnButton, BorderLayout.WEST);
 
         // Añadir el panel de contenido al panel principal
         contentPanel.add(answersPanel, BorderLayout.SOUTH);
+
 
         add(topRightPanel, BorderLayout.NORTH); // Añadir el panel en la parte superior
         add(contentPanel, BorderLayout.CENTER);
