@@ -28,17 +28,32 @@ public class MinigameDragPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
+        // Contenedor vertical para evitar el estiramiento vertical de los paneles
+        JPanel verticalContainer = new JPanel();
+        verticalContainer.setLayout(new BoxLayout(verticalContainer, BoxLayout.Y_AXIS));
+        verticalContainer.setOpaque(false);
+
+        // Panel para envolver el panel de las vocales
+        JPanel dragPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        dragPanelContainer.setOpaque(false);
+
+        // Panel para envolver el panel de la cuadrícula
+        JPanel gridPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        gridPanelContainer.setOpaque(false);
+
         // Panel para las vocales
         dragPanel = new JPanel();
         dragPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
         dragPanel.setOpaque(false);
+        dragPanel.setPreferredSize(new Dimension(500, 100));
 
         // Panel para la cuadrícula
         gridPanel = new JPanel(new GridLayout(1, 5, 20, 20));
         gridPanel.setOpaque(false);
+        gridPanel.setPreferredSize(new Dimension(750, 150));
 
         gridLabels = new HashMap<>();
-        Dimension labelSize = new Dimension(80, 80);
+        Dimension labelSize = new Dimension(50, 160);
         Font labelFont = new Font("Serif", Font.BOLD, 40);
 
         for (int i = 0; i < 5; i++) {
@@ -76,8 +91,9 @@ public class MinigameDragPanel extends JPanel {
             dragPanel.add(dragLabel);
         }
 
-        // Botón de validación
-        JButton validateButton = new JButton("Validar Orden");
+        JButton validateButton = new JButton(new ImageIcon(getClass().getResource("/imagenes/siguiente.png")));
+        validateButton.setBorderPainted(false);
+        validateButton.setContentAreaFilled(false);
         validateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,9 +101,22 @@ public class MinigameDragPanel extends JPanel {
             }
         });
 
-        add(dragPanel, BorderLayout.NORTH);
-        add(gridPanel, BorderLayout.CENTER);
-        add(validateButton, BorderLayout.SOUTH);
+        dragPanelContainer.add(dragPanel);
+        gridPanelContainer.add(gridPanel);
+
+        verticalContainer.add(Box.createVerticalGlue());
+        verticalContainer.add(dragPanelContainer);
+        verticalContainer.add(gridPanelContainer);
+        verticalContainer.add(Box.createVerticalGlue());
+
+        add(verticalContainer, BorderLayout.CENTER);
+        
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setOpaque(false);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
+        buttonPanel.add(validateButton);
+
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     private void validateOrder() {
