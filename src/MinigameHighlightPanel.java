@@ -10,13 +10,16 @@ import java.util.Map;
 
 public class MinigameHighlightPanel extends JPanel {
     private Image fondo;
-    private int correctCount;
+    private int totalScore;
     private MinigamesPanel parentPanel;
     private JLabel[] letterLabels;
     private Map<Character, String> vowelSounds;
     private static final String[] WORDS = {"ELEFANTE", "UKELELE", "IGLESIA", "OSCURO", "ANILLO"};
     private int currentWordIndex = 0;
     private JButton nextButton;
+    private int wordScore;
+    private int totalVowels;
+    private int markedVowels;
 
     public MinigameHighlightPanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel;
@@ -32,7 +35,7 @@ public class MinigameHighlightPanel extends JPanel {
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(0, 0, 0, 0); // Espacio entre componentes
+        gbc.insets = new Insets(0, 0, 0, 0);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -49,12 +52,18 @@ public class MinigameHighlightPanel extends JPanel {
         removeAll();
         String word = WORDS[currentWordIndex];
         letterLabels = new JLabel[word.length()];
+        wordScore = 0;
+        totalVowels = 0;
+        markedVowels = 0;
     
         gbc.gridwidth = 1;
         gbc.gridy = 0;
     
         for (int i = 0; i < word.length(); i++) {
             letterLabels[i] = createLetterLabel(word.charAt(i));
+            if (isVowel(word.charAt(i))) {
+                totalVowels++;
+            }
             gbc.gridx = i;
             add(letterLabels[i], gbc);
         }
@@ -94,8 +103,8 @@ public class MinigameHighlightPanel extends JPanel {
             if (label.getBackground() == Color.WHITE) {
                 if (isVowel(letter)) {
                     label.setBackground(Color.GREEN);
-                    correctCount++;
                     playSound(vowelSounds.get(letter));
+                    markedVowels++;
                 } else {
                     label.setBackground(Color.RED);
                 }
@@ -121,6 +130,14 @@ public class MinigameHighlightPanel extends JPanel {
     }
 
     private void goToNextWord() {
+        if (markedVowels == totalVowels) {
+            wordScore = 1;
+        } else {
+            wordScore = 0;
+        }
+    
+        totalScore += wordScore;
+    
         if (currentWordIndex < WORDS.length - 1) {
             currentWordIndex++;
             displayCurrentWord(new GridBagConstraints());
@@ -130,13 +147,12 @@ public class MinigameHighlightPanel extends JPanel {
     }
 
     private void showResults() {
+        ScoreManager.getInstance().increaseScore(totalScore);
         JOptionPane.showMessageDialog(this,
             "Resultados del Minijuego:\n" +
-            "Vocales correctas: " + correctCount);
-
-        correctCount = 0;
-        currentWordIndex = 0; // Reset for replay
-        parentPanel.getGame().showPanel("Menu"); // Go back to the main menu
+            "Puntaje del ejercicio: " + totalScore);
+        currentWordIndex = 0;
+        parentPanel.getGame().showPanel("Results");
     }
 
     @Override

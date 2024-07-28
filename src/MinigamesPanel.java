@@ -31,6 +31,11 @@ public class MinigamesPanel extends JPanel {
         return game;
     }
 
+    public void showResultsPanel() {
+        // Asegúrate de que el puntaje final esté actualizado antes de mostrar el ResultsPanel
+        cardLayout.show(this, "Results");
+    }
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Minigames");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

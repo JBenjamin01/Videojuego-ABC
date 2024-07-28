@@ -26,7 +26,7 @@ public class Game extends JFrame {
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
             // Bajar el volumen (los dB son logarítmicos, cada -6dB es aproximadamente la mitad del volumen)
-            float volume = -16.0f; // Ajusta este valor según sea necesario (0.0f es el volumen original)
+            float volume = -28.0f; // Ajusta este valor según sea necesario (0.0f es el volumen original)
             gainControl.setValue(volume);
 
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -40,7 +40,8 @@ public class Game extends JFrame {
         mainPanel.add(new CharacterSelectionPanel(this), "CharacterSelection");
         mainPanel.add(new VowelLearningPanel(this), "VowelLearning");
         mainPanel.add(new EvaluationPanel(this), "Evaluation");
-        mainPanel.add(new MinigamesPanel(this), "Minigame"); 
+        mainPanel.add(new MinigamesPanel(this), "Minigame");
+        mainPanel.add(new ResultsPanel(this), "Results"); 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
