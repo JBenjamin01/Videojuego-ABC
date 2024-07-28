@@ -195,7 +195,7 @@ public class EvaluationPanel extends JPanel {
 
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
-        exerciseArea.setFont(new Font("Serif", Font.PLAIN, 24));
+        exerciseArea.setFont(new Font("Cooper Black", Font.PLAIN, 40));
         exerciseArea.setText(getCurrentExercise());
         exerciseArea.setHorizontalAlignment(SwingConstants.CENTER); // Centrar el texto
 
