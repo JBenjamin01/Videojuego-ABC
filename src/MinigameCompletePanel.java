@@ -139,6 +139,7 @@ public class MinigameCompletePanel extends JPanel {
         incorrectAnswers = 0; // Reiniciar el contador de respuestas incorrectas
         exerciseIndex = 0; // Reiniciar el índice del ejercicio
         exerciseArea.setText(getCurrentExercise()); // Reiniciar el área del ejercicio
+        parentPanel.showMinigame("Highlight");
     }
 
     @Override

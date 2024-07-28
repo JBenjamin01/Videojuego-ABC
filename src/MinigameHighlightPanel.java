@@ -14,7 +14,7 @@ public class MinigameHighlightPanel extends JPanel {
     private MinigamesPanel parentPanel;
     private JLabel[] letterLabels;
     private Map<Character, String> vowelSounds;
-    private static final String[] WORDS = {"ELEFANTE", "UNICORNIO", "IGLESIA", "OVEJA", "ANILLO"};
+    private static final String[] WORDS = {"ELEFANTE", "UKELELE", "IGLESIA", "OVEJA", "ANILLO"};
     private int currentWordIndex = 0;
     private JButton nextButton;
 
@@ -119,7 +119,8 @@ public class MinigameHighlightPanel extends JPanel {
             "Vocales correctas: " + correctCount);
 
         correctCount = 0;
-        currentWordIndex = 0;
+        currentWordIndex = 0; // Reset for replay
+        parentPanel.getGame().showPanel("Menu"); // Go back to the main menu
     }
 
     @Override
