@@ -14,6 +14,9 @@ public class MinigameHighlightPanel extends JPanel {
     private MinigamesPanel parentPanel;
     private JLabel[] letterLabels;
     private Map<Character, String> vowelSounds;
+    private static final String[] WORDS = {"ELEFANTE", "UNICORNIO", "IGLESIA", "OVEJA", "ANILLO"};
+    private int currentWordIndex = 0;
+    private JButton nextButton;
 
     public MinigameHighlightPanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel;
@@ -29,7 +32,14 @@ public class MinigameHighlightPanel extends JPanel {
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
 
-        String word = "ELEFANTE";
+        nextButton = new JButton("Next");
+        nextButton.addActionListener(e -> goToNextWord());
+        displayCurrentWord();
+    }
+
+    private void displayCurrentWord() {
+        removeAll();
+        String word = WORDS[currentWordIndex];
         letterLabels = new JLabel[word.length()];
 
         for (int i = 0; i < word.length(); i++) {
@@ -37,9 +47,9 @@ public class MinigameHighlightPanel extends JPanel {
             add(letterLabels[i]);
         }
 
-        JButton checkButton = new JButton("Check Points");
-        checkButton.addActionListener(e -> showResults());
-        add(checkButton);
+        add(nextButton);
+        revalidate();
+        repaint();
     }
 
     private JLabel createLetterLabel(char letter) {
@@ -94,19 +104,28 @@ public class MinigameHighlightPanel extends JPanel {
         }
     }
 
+    private void goToNextWord() {
+        if (currentWordIndex < WORDS.length - 1) {
+            currentWordIndex++;
+            displayCurrentWord();
+        } else {
+            showResults();
+        }
+    }
+
     private void showResults() {
-        JOptionPane.showMessageDialog(this, 
+        JOptionPane.showMessageDialog(this,
             "Resultados del Minijuego:\n" +
             "Vocales correctas: " + correctCount);
 
         correctCount = 0;
+        currentWordIndex = 0;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (fondo != null) {
-            // Dibuja la imagen de fondo sólo si está disponible
             g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
         }
     }
