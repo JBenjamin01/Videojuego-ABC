@@ -11,52 +11,52 @@ import java.io.IOException;
 public class VowelLearningPanel extends JPanel {
 
     private Image fondo;
-    private Map<String, String> vowelSounds;
+    private Map<String, String> sonidosVocales;
 
     public VowelLearningPanel(Game game) {
         // Añadir la imagen de fondo
         fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
 
-        vowelSounds = new LinkedHashMap<>();
-        vowelSounds.put("A", "sounds/a.wav");
-        vowelSounds.put("E", "sounds/e.wav");
-        vowelSounds.put("I", "sounds/i.wav");
-        vowelSounds.put("O", "sounds/o.wav");
-        vowelSounds.put("U", "sounds/u.wav");
+        //Almacenar ruta de los archivos de sonido
+        sonidosVocales = new LinkedHashMap<>();
+        sonidosVocales.put("A", "sounds/a.wav");
+        sonidosVocales.put("E", "sounds/e.wav");
+        sonidosVocales.put("I", "sounds/i.wav");
+        sonidosVocales.put("O", "sounds/o.wav");
+        sonidosVocales.put("U", "sounds/u.wav");
 
         setLayout(new BorderLayout());
 
-        // Panel para las vocales
-        JPanel vowelsPanel = new JPanel(new GridLayout(1, 5));
-        vowelsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Ajustar espaciado entre botones
-        vowelsPanel.setOpaque(false); // Hacer transparente el panel de botones
-        for (String vowel : vowelSounds.keySet()) {
-            JButton vowelButton = new JButton(vowel);
-            vowelButton.setFont(new Font("Cooper Black", Font.PLAIN, 30)); // Tamaño de fuente ajustado
-            vowelButton.setPreferredSize(new Dimension(70, 70)); // Tamaño de botón ajustado
-            vowelButton.addActionListener(new ActionListener() {
+        //Panel para las vocales
+        JPanel panelVocales = new JPanel(new GridLayout(1, 5));
+        panelVocales.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); //Ajustar espacio entre botones
+        panelVocales.setOpaque(false); //Hacer transparente el panel
+        for (String vocal : sonidosVocales.keySet()) {
+            JButton vocalesBtn = new JButton(vocal);
+            vocalesBtn.setFont(new Font("Cooper Black", Font.PLAIN, 30)); //Establecemos el decorado del texto
+            vocalesBtn.setPreferredSize(new Dimension(150, 150)); //Ajustar el tamaño de los botones
+            vocalesBtn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    playSound(vowelSounds.get(vowel));
+                    playSound(sonidosVocales.get(vocal)); //Al ser presionados se ejecuta el archivo de sonido
                 }
             });
-            vowelsPanel.add(vowelButton);
+            panelVocales.add(vocalesBtn);
         }
 
-        // Botón "Siguiente"
-        JButton nextButton = new JButton("Siguiente");
-        nextButton.setFont(new Font("Cooper Black", Font.PLAIN, 30)); // Tamaño de fuente grande
-        nextButton.addActionListener(new ActionListener() {
-            @Override
+        //Botón Siguiente
+        JButton siguienteBtn = new JButton("Siguiente");
+        siguienteBtn.setFont(new Font("Cooper Black", Font.PLAIN, 30)); //Establecemos el decorado del texto
+        siguienteBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 game.showPanel("Evaluation");
             }
         });
-
-        add(vowelsPanel, BorderLayout.CENTER);
-        add(nextButton, BorderLayout.SOUTH);
+        //
+        add(panelVocales, BorderLayout.CENTER);
+        add(siguienteBtn, BorderLayout.SOUTH);
     }
 
-    private void playSound(String soundFile) {
+    private void playSound(String soundFile) { //Método para reproducir sonidos
         try {
             File audioFile = new File(soundFile);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);

@@ -1,6 +1,11 @@
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import java.io.File;
 
 public class Game extends JFrame {
     private CardLayout cardLayout;
@@ -10,6 +15,24 @@ public class Game extends JFrame {
     public Game() {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
+
+        try {
+            File audioFile = new File("");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            // Obtener el control de ganancia para ajustar el volumen
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+            // Bajar el volumen (los dB son logarítmicos, cada -6dB es aproximadamente la mitad del volumen)
+            float volume = -16.0f; // Ajusta este valor según sea necesario (0.0f es el volumen original)
+            gainControl.setValue(volume);
+
+            clip.start();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         // Agregar paneles a la interfaz
         mainPanel.add(new MenuPanel(this), "Menu");
