@@ -15,7 +15,7 @@ public class MinigamesPanel extends JPanel {
         minigameContainer.add(new MinigameDragPanel(this), "Drag");
         minigameContainer.add(new MinigameCompletePanel(this), "Complete");
         minigameContainer.add(new MinigamePaintPanel(this), "Paint");
-        //minigameContainer.add(new MinigameHighlightPanel(this), "Highlight");
+        minigameContainer.add(new MinigameHighlightPanel(this), "Highlight");
 
         setLayout(new BorderLayout());
         add(minigameContainer, BorderLayout.CENTER);
