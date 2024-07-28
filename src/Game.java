@@ -17,7 +17,7 @@ public class Game extends JFrame {
         mainPanel = new JPanel(cardLayout);
 
         try {
-            File audioFile = new File("");
+            File audioFile = new File("sounds/bg.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
