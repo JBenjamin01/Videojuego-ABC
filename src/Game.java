@@ -29,6 +29,7 @@ public class Game extends JFrame {
             float volume = -16.0f; // Ajusta este valor según sea necesario (0.0f es el volumen original)
             gainControl.setValue(volume);
 
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
         } catch (Exception ex) {
             ex.printStackTrace();
