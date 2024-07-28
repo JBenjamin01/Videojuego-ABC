@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 public class ResultsPanel extends JPanel {
     private Game game;
     private static final int MAX_SCORE = 20;
+    private JLabel scoreDetails;
 
     public ResultsPanel(Game game) {
         this.game = game;
-        int finalScore = ScoreManager.getInstance().getScore();
 
         setLayout(new BorderLayout());
 
@@ -17,17 +17,30 @@ public class ResultsPanel extends JPanel {
         scoreLabel.setFont(new Font("Serif", Font.BOLD, 24));
         add(scoreLabel, BorderLayout.NORTH);
 
-        JLabel scoreDetails = new JLabel(String.format("Puntaje final: %d/%d", finalScore, MAX_SCORE), SwingConstants.CENTER);
+        // Inicialmente, no mostramos el puntaje
+        scoreDetails = new JLabel("", SwingConstants.CENTER);
         scoreDetails.setFont(new Font("Serif", Font.PLAIN, 20));
         add(scoreDetails, BorderLayout.CENTER);
 
-        JButton backButton = new JButton("Volver al Menú");
-        backButton.addActionListener(new ActionListener() {
+        JButton showScoreButton = new JButton("Mostrar Puntaje");
+        showScoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.showPanel("Menu");
+                updateScore(); // Actualiza y muestra el puntaje al hacer clic
             }
         });
+        add(showScoreButton, BorderLayout.EAST);
+
+        JButton backButton = new JButton("Volver al Menú");
+        backButton.addActionListener(e -> game.showPanel("Menu"));
         add(backButton, BorderLayout.SOUTH);
+    }
+
+    private void updateScore() {
+        int finalScore = ScoreManager.getInstance().getScore();
+        scoreDetails.setText(String.format("Puntaje final: %d/%d", finalScore, MAX_SCORE));
+
+        revalidate();
+        repaint();
     }
 }
