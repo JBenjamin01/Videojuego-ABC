@@ -30,24 +30,37 @@ public class MinigameHighlightPanel extends JPanel {
         vowelSounds.put('O', "sounds/o.wav");
         vowelSounds.put('U', "sounds/u.wav");
 
-        setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(20, 20, 20, 20); // Espacio entre componentes
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
 
-        nextButton = new JButton("Next");
+        nextButton = new JButton(new ImageIcon(getClass().getResource("/imagenes/siguiente.png")));
+        nextButton.setBorderPainted(false);
+        nextButton.setContentAreaFilled(false);
         nextButton.addActionListener(e -> goToNextWord());
-        displayCurrentWord();
+
+        displayCurrentWord(gbc);
     }
 
-    private void displayCurrentWord() {
+    private void displayCurrentWord(GridBagConstraints gbc) {
         removeAll();
         String word = WORDS[currentWordIndex];
         letterLabels = new JLabel[word.length()];
 
         for (int i = 0; i < word.length(); i++) {
             letterLabels[i] = createLetterLabel(word.charAt(i));
-            add(letterLabels[i]);
+            gbc.gridx = i;
+            add(letterLabels[i], gbc);
         }
 
-        add(nextButton);
+        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        add(nextButton, gbc);
+        
         revalidate();
         repaint();
     }
@@ -107,7 +120,7 @@ public class MinigameHighlightPanel extends JPanel {
     private void goToNextWord() {
         if (currentWordIndex < WORDS.length - 1) {
             currentWordIndex++;
-            displayCurrentWord();
+            displayCurrentWord(new GridBagConstraints());
         } else {
             showResults();
         }
