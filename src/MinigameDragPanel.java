@@ -31,21 +31,23 @@ public class MinigameDragPanel extends JPanel {
         // Panel para las vocales
         dragPanel = new JPanel();
         dragPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
-        dragPanel.setBorder(BorderFactory.createTitledBorder("Vocales"));
         dragPanel.setOpaque(false);
 
         // Panel para la cuadrícula
         gridPanel = new JPanel(new GridLayout(1, 5, 20, 20));
-        gridPanel.setBorder(BorderFactory.createTitledBorder("Arrastra las vocales aquí"));
         gridPanel.setOpaque(false);
 
         gridLabels = new HashMap<>();
+        Dimension labelSize = new Dimension(80, 80);
+        Font labelFont = new Font("Serif", Font.BOLD, 40);
+
         for (int i = 0; i < 5; i++) {
             JLabel gridLabel = new JLabel("", SwingConstants.CENTER);
-            gridLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-            gridLabel.setPreferredSize(new Dimension(80, 80));
+            gridLabel.setFont(labelFont);
+            gridLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+            gridLabel.setPreferredSize(labelSize);
             gridLabel.setOpaque(true);
-            gridLabel.setBackground(Color.LIGHT_GRAY);
+            gridLabel.setBackground(new Color(230, 230, 230));
             gridLabel.setTransferHandler(new TransferHandler("text"));
             gridLabels.put("label" + i, gridLabel);
             gridPanel.add(gridLabel);
@@ -57,7 +59,7 @@ public class MinigameDragPanel extends JPanel {
         for (String vowel : vowels) {
             JLabel dragLabel = new JLabel(vowel, SwingConstants.CENTER);
             dragLabel.setFont(new Font("Serif", Font.BOLD, 24));
-            dragLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
+            dragLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
             dragLabel.setOpaque(true);
             dragLabel.setBackground(Color.WHITE);
             dragLabel.setPreferredSize(new Dimension(80, 80));

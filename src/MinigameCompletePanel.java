@@ -35,11 +35,11 @@ public class MinigameCompletePanel extends JPanel {
 
         // Inicializar los ejercicios
         exercises = new LinkedHashMap<>();
-        exercises.put("M_DIFICACIÓN", "MODIFICACIÓN");
-        exercises.put("S_NTIMENTAL", "SENTIMENTAL");
-        exercises.put("_DUCACIÓN", "EDUCACIÓN");
-        exercises.put("C_RACTERÍSTICA", "CARACTERÍSTICA");
-        exercises.put("_NIVERSIDAD", "UNIVERSIDAD");
+        exercises.put("_MIG_", "AMIGO");
+        exercises.put("S_NT_MIENT_", "SENTIMIENTO");
+        exercises.put("_BUEL_", "ABUELO");
+        exercises.put("C_RAZ_N", "CORAZON");
+        exercises.put("C_L_GI_", "COLEGIO");
 
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
