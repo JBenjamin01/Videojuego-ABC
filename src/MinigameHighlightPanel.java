@@ -18,10 +18,8 @@ public class MinigameHighlightPanel extends JPanel {
     public MinigameHighlightPanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel;
 
-        // Añadir la imagen de fondo
         fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
 
-        // Inicializar sonidos de las vocales
         vowelSounds = new LinkedHashMap<>();
         vowelSounds.put('A', "sounds/a.wav");
         vowelSounds.put('E', "sounds/e.wav");

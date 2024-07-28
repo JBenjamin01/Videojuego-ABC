@@ -109,7 +109,7 @@ public class MinigameCompletePanel extends JPanel {
             exerciseArea.setText(getCurrentExercise());
         } else {
             showResults();
-            parentPanel.showMinigame("Paint");
+            parentPanel.showMinigame("Highlight");
         }
     }
 

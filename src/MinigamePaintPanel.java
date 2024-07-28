@@ -249,7 +249,8 @@ public class MinigamePaintPanel extends JPanel {
                         "Porcentaje de efectividad: " + String.format("%.2f", accuracy) + "%",
                 "Evaluación",
                 JOptionPane.INFORMATION_MESSAGE);
-        parentPanel.showMinigame("minigamesMenu");
+        //parentPanel.showMinigame("minigamesMenu");
+        parentPanel.showMinigame("Complete");
     }
 
     @Override

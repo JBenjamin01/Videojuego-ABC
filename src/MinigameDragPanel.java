@@ -103,10 +103,10 @@ public class MinigameDragPanel extends JPanel {
 
         if (isCorrect) {
             JOptionPane.showMessageDialog(this, "¡Correcto! Las vocales están en el orden correcto.");
-            parentPanel.showMinigame("Complete");
+            parentPanel.showMinigame("Paint");
         } else {
             JOptionPane.showMessageDialog(this, "Incorrecto.");
-            parentPanel.showMinigame("Complete");
+            parentPanel.showMinigame("Paint");
         }
     }
 
