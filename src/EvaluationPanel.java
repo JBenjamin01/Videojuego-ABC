@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class EvaluationPanel extends JPanel {
@@ -15,20 +14,12 @@ public class EvaluationPanel extends JPanel {
     private JLabel imageLabel; // Nuevo JLabel para la imagen
     private Map<String, String> exercises;
     private Map<String, String> exerciseImages; // Mapa para las imágenes de los ejercicios
-    private Map<String, String> vowelSounds;
     private Map<String, String> completeWordSounds;
     private int exerciseIndex = 0;
 
     public EvaluationPanel(Game game) {
         // Añadir la imagen de fondo
         fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
-
-        vowelSounds = new LinkedHashMap<>();
-        vowelSounds.put("A", "sounds/a.wav");
-        vowelSounds.put("E", "sounds/e.wav");
-        vowelSounds.put("I", "sounds/i.wav");
-        vowelSounds.put("O", "sounds/o.wav");
-        vowelSounds.put("U", "sounds/u.wav");
 
         completeWordSounds = new HashMap<>();
         completeWordSounds.put("ARROZ", "sounds/arroz.wav");
@@ -227,7 +218,6 @@ public class EvaluationPanel extends JPanel {
             vowelButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    playSound(vowelSounds.get(vowel));
                     checkAnswer(vowel);
                 }
             });
@@ -289,17 +279,7 @@ public class EvaluationPanel extends JPanel {
     
             // Verificar si el ejercicio está completo
             if (!exerciseText.contains("_")) {
-                // Crear un timer para retrasar la reproducción del sonido
-                Timer timer = new Timer(1000, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        playSound(completeWordSounds.get(correctAnswer)); // Reproducir el sonido de la palabra completa
-                        ((Timer)e.getSource()).stop(); // Detener el timer una vez se ha ejecutado
-                    }
-                });
-                timer.setRepeats(false); // Hacer que el timer se ejecute solo una vez
-                timer.start(); // Iniciar el timer
-            
+                playSound(completeWordSounds.get(correctAnswer)); // Reproducir el sonido de la palabra completa
                 JOptionPane.showMessageDialog(this, "Correcto! Vamos al siguiente.");
                 exerciseIndex++;
                 if (exerciseIndex < exercises.size()) {
