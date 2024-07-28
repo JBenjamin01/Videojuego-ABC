@@ -30,7 +30,7 @@ public class ResultsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateScore();
-                insertScoreIntoDatabase();
+                //insertScoreIntoDatabase();
             }
         });
         add(showScoreButton, BorderLayout.EAST);
