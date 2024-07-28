@@ -150,11 +150,9 @@ public class MinigameHighlightPanel extends JPanel {
         ScoreManager.getInstance().increaseScore(totalScore);
         JOptionPane.showMessageDialog(this,
             "Resultados del Minijuego:\n" +
-            "Puntaje total: " + totalScore);
-
-        totalScore = 0;
+            "Puntaje del ejercicio: " + totalScore);
         currentWordIndex = 0;
-        parentPanel.getGame().showPanel("Menu");
+        parentPanel.getGame().showPanel("Results");
     }
 
     @Override
