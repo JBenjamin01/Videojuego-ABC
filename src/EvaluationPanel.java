@@ -30,6 +30,62 @@ public class EvaluationPanel extends JPanel {
         vowelSounds.put("O", "sounds/o.wav");
         vowelSounds.put("U", "sounds/u.wav");
 
+        completeWordSounds = new HashMap<>();
+        completeWordSounds.put("ARROZ", "sounds/arroz.wav");
+        completeWordSounds.put("ALA", "sounds/ala.wav");
+        completeWordSounds.put("AVE", "sounds/ave.wav");
+        completeWordSounds.put("ARO", "sounds/aro.wav");
+        completeWordSounds.put("ABEJA", "sounds/abeja.wav");
+        completeWordSounds.put("AGUA", "sounds/agua.wav");
+        completeWordSounds.put("ANCLA", "sounds/ancla.wav");
+        completeWordSounds.put("ARAÑA", "sounds/arana.wav");
+        completeWordSounds.put("AMOR", "sounds/amor.wav");
+        completeWordSounds.put("AZUL", "sounds/azul.wav");
+        
+        completeWordSounds.put("ELEFANTE", "sounds/elefante.wav");
+        completeWordSounds.put("ESPEJO", "sounds/espejo.wav");
+        completeWordSounds.put("ESTRELLA", "sounds/estrella.wav");
+        completeWordSounds.put("ESCALERA", "sounds/escalera.wav");
+        completeWordSounds.put("ESCUDO", "sounds/escudo.wav");
+        completeWordSounds.put("ESCUELA", "sounds/escuela.wav");
+        completeWordSounds.put("ESCOBA", "sounds/escoba.wav");
+        completeWordSounds.put("ENANO", "sounds/enano.wav");
+        completeWordSounds.put("ESTATUA", "sounds/estatua.wav");
+        completeWordSounds.put("ESPONJA", "sounds/esponja.wav");
+        
+        completeWordSounds.put("ISLA", "sounds/isla.wav");
+        completeWordSounds.put("IGLESIA", "sounds/iglesia.wav");
+        completeWordSounds.put("IZQUIERDA", "sounds/izquierda.wav");
+        completeWordSounds.put("IGLU", "sounds/iglu.wav");
+        completeWordSounds.put("INSTRUMENTOS", "sounds/instrumentos.wav");
+        completeWordSounds.put("INCENDIO", "sounds/incendio.wav");
+        completeWordSounds.put("IMPRESORA", "sounds/impresora.wav");
+        completeWordSounds.put("INVIERNO", "sounds/invierno.wav");
+        completeWordSounds.put("IMAN", "sounds/iman.wav");
+        completeWordSounds.put("IGUANA", "sounds/iguana.wav");
+        
+        completeWordSounds.put("OSO", "sounds/oso.wav");
+        completeWordSounds.put("ORO", "sounds/oro.wav");
+        completeWordSounds.put("OREJA", "sounds/oreja.wav");
+        completeWordSounds.put("OLA", "sounds/ola.wav");
+        completeWordSounds.put("OJO", "sounds/ojo.wav");
+        completeWordSounds.put("OVEJA", "sounds/oveja.wav");
+        completeWordSounds.put("OCHO", "sounds/ocho.wav");
+        completeWordSounds.put("OLLA", "sounds/olla.wav");
+        completeWordSounds.put("ORUGA", "sounds/oruga.wav");
+        completeWordSounds.put("OSTRA", "sounds/ostra.wav");
+        
+        completeWordSounds.put("UVA", "sounds/uva.wav");
+        completeWordSounds.put("UNO", "sounds/uno.wav");
+        completeWordSounds.put("UÑA", "sounds/una.wav");
+        completeWordSounds.put("UNICORNIO", "sounds/unicornio.wav");
+        completeWordSounds.put("URRACA", "sounds/urraca.wav");
+        completeWordSounds.put("UKELELE", "sounds/ukelele.wav");
+        completeWordSounds.put("UNIFORME", "sounds/uniforme.wav");
+        completeWordSounds.put("UTENSILIOS", "sounds/utensilios.wav");
+        completeWordSounds.put("UNIVERSO", "sounds/universo.wav");
+        completeWordSounds.put("URNA", "sounds/urna.wav");
+
         setLayout(new BorderLayout());
 
         // Inicializar los ejercicios
@@ -233,6 +289,17 @@ public class EvaluationPanel extends JPanel {
     
             // Verificar si el ejercicio está completo
             if (!exerciseText.contains("_")) {
+                // Crear un timer para retrasar la reproducción del sonido
+                Timer timer = new Timer(1000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        playSound(completeWordSounds.get(correctAnswer)); // Reproducir el sonido de la palabra completa
+                        ((Timer)e.getSource()).stop(); // Detener el timer una vez se ha ejecutado
+                    }
+                });
+                timer.setRepeats(false); // Hacer que el timer se ejecute solo una vez
+                timer.start(); // Iniciar el timer
+            
                 JOptionPane.showMessageDialog(this, "Correcto! Vamos al siguiente.");
                 exerciseIndex++;
                 if (exerciseIndex < exercises.size()) {
