@@ -16,6 +16,7 @@ public class EvaluationPanel extends JPanel {
     private Map<String, String> exercises;
     private Map<String, String> exerciseImages; // Mapa para las imágenes de los ejercicios
     private Map<String, String> vowelSounds;
+    private Map<String, String> completeWordSounds;
     private int exerciseIndex = 0;
 
     public EvaluationPanel(Game game) {
