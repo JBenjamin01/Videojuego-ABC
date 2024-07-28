@@ -1,16 +1,35 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class MinigameHighlightPanel extends JPanel {
+    private Image fondo;
     private int correctCount;
     private MinigamesPanel parentPanel;
     private JLabel[] letterLabels;
+    private Map<Character, String> vowelSounds;
 
     public MinigameHighlightPanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel;
-        setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+
+        // Añadir la imagen de fondo
+        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+
+        // Inicializar sonidos de las vocales
+        vowelSounds = new LinkedHashMap<>();
+        vowelSounds.put('A', "sounds/a.wav");
+        vowelSounds.put('E', "sounds/e.wav");
+        vowelSounds.put('I', "sounds/i.wav");
+        vowelSounds.put('O', "sounds/o.wav");
+        vowelSounds.put('U', "sounds/u.wav");
+
+        setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
 
         String word = "ELEFANTE";
         letterLabels = new JLabel[word.length()];
@@ -31,7 +50,7 @@ public class MinigameHighlightPanel extends JPanel {
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         label.setOpaque(true);
         label.setBackground(Color.WHITE);
-        label.setPreferredSize(new Dimension(80, 80));
+        label.setPreferredSize(new Dimension(70, 70));
         label.addMouseListener(new HighlightMouseAdapter(label, letter));
         return label;
     }
@@ -42,6 +61,7 @@ public class MinigameHighlightPanel extends JPanel {
 
         public HighlightMouseAdapter(JLabel label, char letter) {
             this.label = label;
+            this.label.setOpaque(true);
             this.letter = letter;
         }
 
@@ -51,6 +71,7 @@ public class MinigameHighlightPanel extends JPanel {
                 if (isVowel(letter)) {
                     label.setBackground(Color.GREEN);
                     correctCount++;
+                    playSound(vowelSounds.get(letter));
                 } else {
                     label.setBackground(Color.RED);
                 }
@@ -63,19 +84,32 @@ public class MinigameHighlightPanel extends JPanel {
         return "AEIOUaeiou".indexOf(c) != -1;
     }
 
+    private void playSound(String soundFile) {
+        try {
+            File audioFile = new File(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private void showResults() {
         JOptionPane.showMessageDialog(this, 
             "Resultados del Minijuego:\n" +
             "Vocales correctas: " + correctCount);
-        
+
         correctCount = 0;
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Minigame Highlight Panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 500); // Ajustar tamaño de la ventana
-        frame.add(new MinigameHighlightPanel(null));
-        frame.setVisible(true);
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (fondo != null) {
+            // Dibuja la imagen de fondo sólo si está disponible
+            g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 }
