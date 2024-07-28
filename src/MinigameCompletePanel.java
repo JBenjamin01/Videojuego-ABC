@@ -43,9 +43,9 @@ public class MinigameCompletePanel extends JPanel {
 
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
-        exerciseArea.setFont(new Font("Serif", Font.PLAIN, 24));
+        exerciseArea.setFont(new Font("Serif", Font.PLAIN, 48));
         exerciseArea.setText(getCurrentExercise());
-        exerciseArea.setHorizontalAlignment(SwingConstants.CENTER); // Centrar el texto
+        exerciseArea.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Panel para abordar el área de ejercicios y los botones
         JPanel contentPanel = new JPanel(new BorderLayout());
@@ -85,12 +85,17 @@ public class MinigameCompletePanel extends JPanel {
     private void checkAnswer(String vowel) {
         String exerciseText = exerciseArea.getText();
         String correctAnswer = exercises.get(getCurrentExercise());
+        boolean correct = false;
 
-        int underscoreIndex = exerciseText.indexOf('_');
-        if (underscoreIndex != -1 && correctAnswer.charAt(underscoreIndex) == vowel.charAt(0)) {
-            exerciseText = exerciseText.substring(0, underscoreIndex) + vowel + exerciseText.substring(underscoreIndex + 1);
+        for (int i = 0; i < exerciseText.length(); i++) {
+            if (exerciseText.charAt(i) == '_' && correctAnswer.charAt(i) == vowel.charAt(0)) {
+                exerciseText = exerciseText.substring(0, i) + vowel + exerciseText.substring(i + 1);
+                correct = true;
+            }
+        }
+
+        if (correct) {
             exerciseArea.setText(exerciseText);
-
             if (!exerciseText.contains("_")) {
                 JOptionPane.showMessageDialog(this, "¡Correcto! Vamos al siguiente.");
                 correctAnswers++; // Incrementar respuestas correctas
