@@ -115,12 +115,12 @@ public class EvaluationPanel extends JPanel {
         exercises.put("_SLA", "ISLA");
         exercises.put("_GLESIA", "IGLESIA");
         exercises.put("_ZQUIERDA", "IZQUIERDA");
-        exercises.put("_GLÚ", "IGLÚ");
+        exercises.put("_GLU", "IGLU");
         exercises.put("_NSTRUMENTOS", "INSTRUMENTOS");
         exercises.put("_NCENDIO", "INCENDIO");
         exercises.put("_MPRESORA", "IMPRESORA");
         exercises.put("_NVIERNO", "INVIERNO");
-        exercises.put("_MÁN", "IMÁN");  
+        exercises.put("_MAN", "IMAN");  
         exercises.put("_GUANA", "IGUANA");
 
         exercises.put("_SO", "OSO");
@@ -172,12 +172,12 @@ public class EvaluationPanel extends JPanel {
         exerciseImages.put("_SLA", "/imagenes/isla.jpg");
         exerciseImages.put("_GLESIA", "/imagenes/iglesia.jpg");
         exerciseImages.put("_ZQUIERDA", "/imagenes/izquierda.png");
-        exerciseImages.put("_GLÚ", "/imagenes/iglu.jpg");
+        exerciseImages.put("_GLU", "/imagenes/iglu.jpg");
         exerciseImages.put("_NSTRUMENTOS", "/imagenes/instrumentos.png");
         exerciseImages.put("_NCENDIO", "/imagenes/incendio.jpg");
         exerciseImages.put("_MPRESORA", "/imagenes/impresora.jpg");
         exerciseImages.put("_NVIERNO", "/imagenes/invierno.jpg");
-        exerciseImages.put("_MÁN", "/imagenes/iman.jpg");  
+        exerciseImages.put("_MAN", "/imagenes/iman.jpg");  
         exerciseImages.put("_GUANA", "/imagenes/iguana.jpg");
 
         exerciseImages.put("_SO", "/imagenes/oso.jpg");
