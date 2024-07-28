@@ -1,4 +1,5 @@
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,21 +14,11 @@ import java.awt.Insets;
 public class MenuPanel extends JPanel {
 
     private Image fondo;
+    private Image titulo;
 
     public MenuPanel(Game game) {
         fondo = new ImageIcon(getClass().getResource("imagenes/fondo.jpg")).getImage();
-
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(1, 0, 1, 0); // Espaciado entre los botones
-
-        // Configuración para que los botones estén en el centro y un poco más abajo
-        gbc.weightx = 1;
-        gbc.weighty = 0;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.NONE;
+        titulo = new ImageIcon(getClass().getResource("imagenes/aeiou.png")).getImage();
 
         // Tamaño deseado para los botones
         int buttonWidth = 180;
@@ -43,8 +34,6 @@ public class MenuPanel extends JPanel {
                 game.showPanel("CharacterSelection");
             }
         });
-        gbc.gridy = 1;
-        this.add(startButton, gbc);
 
         // Botón de créditos
         JButton creditsButton = new JButton(createResizedIcon("imagenes/creditos.png", buttonWidth, buttonHeight));
@@ -56,8 +45,6 @@ public class MenuPanel extends JPanel {
                 game.showPanel("Credits");
             }
         });
-        gbc.gridy = 2;
-        this.add(creditsButton, gbc);
 
         // Botón de salir
         JButton exitButton = new JButton(createResizedIcon("imagenes/salir.png", buttonWidth, buttonHeight));
@@ -69,8 +56,28 @@ public class MenuPanel extends JPanel {
                 System.exit(0);
             }
         });
-        gbc.gridy = 3;
-        this.add(exitButton, gbc);
+        // Configuración del layout principal
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10); // Espaciado alrededor de los componentes
+
+        // Configuración del JLabel de imagen
+        JLabel image = new JLabel(new ImageIcon(titulo));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(image, gbc);
+
+        // Crear y configurar el panel de botones
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false); // Hacer transparente el panel de botones
+        buttonPanel.add(startButton);
+        buttonPanel.add(creditsButton);
+        buttonPanel.add(exitButton);
+
+        // Configuración del panel de botones
+        gbc.gridy = 1;
+        add(buttonPanel, gbc);
     }
 
     @Override
