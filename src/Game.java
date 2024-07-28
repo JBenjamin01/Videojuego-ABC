@@ -5,7 +5,6 @@ import java.awt.CardLayout;
 public class Game extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    private String selectedCharacter;
 
     public Game() {
         cardLayout = new CardLayout();
@@ -16,7 +15,6 @@ public class Game extends JFrame {
         mainPanel.add(new CharacterSelectionPanel(this), "CharacterSelection");
         mainPanel.add(new VowelLearningPanel(this), "VowelLearning");
         mainPanel.add(new EvaluationPanel(this), "Evaluation");
-        mainPanel.add(new MinigamesPanel(this), "Minigame"); 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
@@ -26,17 +24,6 @@ public class Game extends JFrame {
 
     public void showPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
-    }
-
-    public void selectCharacter(String characterName) {
-        // Almacena el personaje seleccionado
-        this.selectedCharacter = characterName;
-        System.out.println("Personaje seleccionado: " + characterName);
-        showPanel("VowelLearning");
-    }
-
-    public String getSelectedCharacter() {
-        return selectedCharacter;
     }
 
     public static void main(String[] args) {
