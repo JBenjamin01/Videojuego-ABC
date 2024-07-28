@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class ResultsPanel extends JPanel {
     private Game game;
@@ -26,7 +29,8 @@ public class ResultsPanel extends JPanel {
         showScoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateScore(); // Actualiza y muestra el puntaje al hacer clic
+                updateScore();
+                insertScoreIntoDatabase();
             }
         });
         add(showScoreButton, BorderLayout.EAST);
@@ -42,5 +46,19 @@ public class ResultsPanel extends JPanel {
 
         revalidate();
         repaint();
+    }
+
+    private void insertScoreIntoDatabase() {
+        int finalScore = ScoreManager.getInstance().getScore();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+
+        String sql = "INSERT INTO .....";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, finalScore);
+            statement.executeUpdate();
+            System.out.println("Puntaje insertado en la base de datos: " + finalScore);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
