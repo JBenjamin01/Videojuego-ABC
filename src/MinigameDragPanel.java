@@ -129,6 +129,8 @@ public class MinigameDragPanel extends JPanel {
                 score++;
             }
         }
+
+        ScoreManager.getInstance().increaseScore(score);
     
         JOptionPane.showMessageDialog(this, "Puntuación: " + score + " puntos.");
         parentPanel.showMinigame("Paint");
