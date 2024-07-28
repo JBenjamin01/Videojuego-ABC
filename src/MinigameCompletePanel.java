@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -35,18 +34,12 @@ public class MinigameCompletePanel extends JPanel {
         setLayout(new BorderLayout());
 
         // Inicializar los ejercicios
-        exercises = new HashMap<>();
-        exercises.put("_RROZ", "ARROZ");
-        exercises.put("_LA", "ALA");
-        exercises.put("_VE", "AVE");
-        exercises.put("_RO", "ARO");
-        exercises.put("_BEJA", "ABEJA");
-
-        exercises.put("_SCUELA", "ESCUELA");
-        exercises.put("_SCOBA", "ESCOBA");
-        exercises.put("_NANO", "ENANO");
-        exercises.put("_STATUA", "ESTATUA");
-        exercises.put("_SPONJA", "ESPONJA");
+        exercises = new LinkedHashMap<>();
+        exercises.put("M_DIFICACIÓN", "MODIFICACIÓN");
+        exercises.put("S_NTIMENTAL", "SENTIMENTAL");
+        exercises.put("_DUCACIÓN", "EDUCACIÓN");
+        exercises.put("C_RACTERÍSTICA", "CARACTERÍSTICA");
+        exercises.put("_NIVERSIDAD", "UNIVERSIDAD");
 
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
@@ -92,19 +85,19 @@ public class MinigameCompletePanel extends JPanel {
     private void checkAnswer(String vowel) {
         String exerciseText = exerciseArea.getText();
         String correctAnswer = exercises.get(getCurrentExercise());
-    
+
         int underscoreIndex = exerciseText.indexOf('_');
         if (underscoreIndex != -1 && correctAnswer.charAt(underscoreIndex) == vowel.charAt(0)) {
             exerciseText = exerciseText.substring(0, underscoreIndex) + vowel + exerciseText.substring(underscoreIndex + 1);
             exerciseArea.setText(exerciseText);
-    
+
             if (!exerciseText.contains("_")) {
-                JOptionPane.showMessageDialog(this, "Correcto! Vamos al siguiente.");
+                JOptionPane.showMessageDialog(this, "¡Correcto! Vamos al siguiente.");
                 correctAnswers++; // Incrementar respuestas correctas
                 nextExercise();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Incorrecto! Pasando al siguiente.");
+            JOptionPane.showMessageDialog(this, "Incorrecto. Pasando al siguiente.");
             incorrectAnswers++; // Incrementar respuestas incorrectas
             nextExercise();
         }
@@ -116,7 +109,7 @@ public class MinigameCompletePanel extends JPanel {
             exerciseArea.setText(getCurrentExercise());
         } else {
             showResults();
-            parentPanel.showMinigame("Drag");
+            parentPanel.showMinigame("Paint");
         }
     }
 
