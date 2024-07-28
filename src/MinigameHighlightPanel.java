@@ -12,7 +12,7 @@ public class MinigameHighlightPanel extends JPanel {
         this.parentPanel = parentPanel;
         setLayout(new GridLayout(1, 0));
 
-        String word = "ELEFANTE";
+        String word = "ELEFANTE"; // Puedes cambiar la palabra aquí
         letterLabels = new JLabel[word.length()];
 
         for (int i = 0; i < word.length(); i++) {
@@ -31,7 +31,7 @@ public class MinigameHighlightPanel extends JPanel {
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         label.setOpaque(true);
         label.setBackground(Color.WHITE);
-        label.setPreferredSize(new Dimension(80, 80));
+        label.setPreferredSize(new Dimension(80, 80)); // Tamaño de cada cuadro
         label.addMouseListener(new HighlightMouseAdapter(label, letter));
         return label;
     }
@@ -48,8 +48,10 @@ public class MinigameHighlightPanel extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             if (isVowel(letter)) {
-                label.setBackground(Color.RED);
+                label.setBackground(Color.GREEN);
                 correctCount++;
+            } else {
+                label.setBackground(Color.RED);
             }
         }
     }
