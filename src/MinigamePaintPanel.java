@@ -8,11 +8,8 @@ import java.util.Set;
 public class MinigamePaintPanel extends JPanel {
     private static final int[] GRID_ROWS = {5, 5, 5, 5, 5};
     private static final int[] GRID_COLS = {4, 3, 3, 4, 4};
-    private static final String[] VOCALS = {"A", "E", "I", "O", "U"};
     private static final int CELL_SIZE = 100;
     private int level = 0;
-    private int correctClicks = 0;
-    private int totalClicks = 0;
     private boolean[][] paintedCells;
     private MinigamesPanel parentPanel;
     private JButton nextLevelButton;
@@ -113,6 +110,7 @@ public class MinigamePaintPanel extends JPanel {
             if (isLevelCorrect()) {
                 feedbackLabel.setText("¡Correcto!");
                 JOptionPane.showMessageDialog(MinigamePaintPanel.this, "¡Correcto!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                ScoreManager.getInstance().increaseScore(1);
             } else {
                 feedbackLabel.setText("Te equivocaste.");
                 JOptionPane.showMessageDialog(MinigamePaintPanel.this, "Te equivocaste.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -162,10 +160,6 @@ public class MinigamePaintPanel extends JPanel {
                 int col = (e.getX() - offsetX) / CELL_SIZE;
                 if (row >= 0 && row < GRID_ROWS[level] && col >= 0 && col < GRID_COLS[level] && !paintedCells[row][col]) {
                     paintedCells[row][col] = true;
-                    totalClicks++;
-                    if (isCorrectCell(row, col)) {
-                        correctClicks++;
-                    }
                     repaint();
                 }
             }
@@ -173,64 +167,42 @@ public class MinigamePaintPanel extends JPanel {
     }
 
     private boolean isCorrectCell(int row, int col) {
-        Set<Point> currentLevelPoints;
-        switch (level) {
-            case 0:
-                currentLevelPoints = level1Points;
-                break;
-            case 1:
-                currentLevelPoints = level2Points;
-                break;
-            case 2:
-                currentLevelPoints = level3Points;
-                break;
-            case 3:
-                currentLevelPoints = level4Points;
-                break;
-            case 4:
-                currentLevelPoints = level5Points;
-                break;
-            default:
-                currentLevelPoints = new HashSet<>();
-        }
+        Set<Point> currentLevelPoints = getCurrentLevelPoints();
         return currentLevelPoints.contains(new Point(row, col));
     }
 
     private boolean isLevelCorrect() {
-        Set<Point> currentLevelPoints;
-        switch (level) {
-            case 0:
-                currentLevelPoints = level1Points;
-                break;
-            case 1:
-                currentLevelPoints = level2Points;
-                break;
-            case 2:
-                currentLevelPoints = level3Points;
-                break;
-            case 3:
-                currentLevelPoints = level4Points;
-                break;
-            case 4:
-                currentLevelPoints = level5Points;
-                break;
-            default:
-                currentLevelPoints = new HashSet<>();
-        }
+        Set<Point> currentLevelPoints = getCurrentLevelPoints();
         for (Point p : currentLevelPoints) {
             if (!paintedCells[p.x][p.y]) {
                 return false;
             }
         }
-        int paintedCount = 0;
-        for (boolean[] row : paintedCells) {
-            for (boolean cell : row) {
-                if (cell) {
-                    paintedCount++;
+        for (int row = 0; row < GRID_ROWS[level]; row++) {
+            for (int col = 0; col < GRID_COLS[level]; col++) {
+                if (paintedCells[row][col] && !currentLevelPoints.contains(new Point(row, col))) {
+                    return false;
                 }
             }
         }
-        return paintedCount == currentLevelPoints.size();
+        return true;
+    }
+
+    private Set<Point> getCurrentLevelPoints() {
+        switch (level) {
+            case 0:
+                return level1Points;
+            case 1:
+                return level2Points;
+            case 2:
+                return level3Points;
+            case 3:
+                return level4Points;
+            case 4:
+                return level5Points;
+            default:
+                return new HashSet<>();
+        }
     }
 
     private void resetGrid() {
@@ -242,14 +214,11 @@ public class MinigamePaintPanel extends JPanel {
     }
 
     private void showEvaluation() {
-        double accuracy = ((double) correctClicks / totalClicks) * 100;
+        // Logic to calculate the final score for the game
         JOptionPane.showMessageDialog(this,
-                "Aciertos: " + correctClicks + "\n" +
-                        "Errores: " + (totalClicks - correctClicks) + "\n" +
-                        "Porcentaje de efectividad: " + String.format("%.2f", accuracy) + "%",
+                "Evaluación terminada.",
                 "Evaluación",
                 JOptionPane.INFORMATION_MESSAGE);
-        //parentPanel.showMinigame("minigamesMenu");
         parentPanel.showMinigame("Complete");
     }
 
