@@ -32,7 +32,7 @@ public class VowelLearningPanel extends JPanel {
         vowelsPanel.setOpaque(false); // Hacer transparente el panel de botones
         for (String vowel : vowelSounds.keySet()) {
             JButton vowelButton = new JButton(vowel);
-            vowelButton.setFont(new Font("Serif", Font.PLAIN, 25)); // Tamaño de fuente ajustado
+            vowelButton.setFont(new Font("Cooper Black", Font.PLAIN, 30)); // Tamaño de fuente ajustado
             vowelButton.setPreferredSize(new Dimension(70, 70)); // Tamaño de botón ajustado
             vowelButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -44,7 +44,7 @@ public class VowelLearningPanel extends JPanel {
 
         // Botón "Siguiente"
         JButton nextButton = new JButton("Siguiente");
-        nextButton.setFont(new Font("Serif", Font.PLAIN, 30)); // Tamaño de fuente grande
+        nextButton.setFont(new Font("Cooper Black", Font.PLAIN, 30)); // Tamaño de fuente grande
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

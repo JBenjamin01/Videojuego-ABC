@@ -29,7 +29,7 @@ public class EvaluationPanel extends JPanel {
         completeWordSounds.put("ABEJA", "sounds/abeja.wav");
         completeWordSounds.put("AGUA", "sounds/agua.wav");
         completeWordSounds.put("ANCLA", "sounds/ancla.wav");
-        completeWordSounds.put("ARAÑA", "sounds/arana.wav");
+        completeWordSounds.put("ARAÑA", "sounds/araña.wav");
         completeWordSounds.put("AMOR", "sounds/amor.wav");
         completeWordSounds.put("AZUL", "sounds/azul.wav");
         
@@ -73,7 +73,7 @@ public class EvaluationPanel extends JPanel {
         completeWordSounds.put("URRACA", "sounds/urraca.wav");
         completeWordSounds.put("UKELELE", "sounds/ukelele.wav");
         completeWordSounds.put("UNIFORME", "sounds/uniforme.wav");
-        completeWordSounds.put("UTENSILIOS", "sounds/utensilios.wav");
+        completeWordSounds.put("UTENSILIOS", "sounds/utensilio.wav");
         completeWordSounds.put("UNIVERSO", "sounds/universo.wav");
         completeWordSounds.put("URNA", "sounds/urna.wav");
 
@@ -215,6 +215,7 @@ public class EvaluationPanel extends JPanel {
         String[] vowels = {"A", "E", "I", "O", "U"};
         for (String vowel : vowels) {
             JButton vowelButton = new JButton(vowel);
+            vowelButton.setFont(new Font("Cooper Black", Font.PLAIN, 40));
             vowelButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
