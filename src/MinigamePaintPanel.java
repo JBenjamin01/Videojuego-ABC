@@ -17,6 +17,8 @@ public class MinigamePaintPanel extends JPanel {
     private MinigamesPanel parentPanel;
     private JButton nextLevelButton;
     private JLabel feedbackLabel;
+    private JLabel titleLabel;
+    private JLabel subtitleLabel;
     private Image backgroundImage;
 
     private Set<Point> level1Points = new HashSet<>() {{
@@ -100,12 +102,13 @@ public class MinigamePaintPanel extends JPanel {
         paintedCells = new boolean[GRID_ROWS[level]][GRID_COLS[level]];
 
         try {
-            backgroundImage = new ImageIcon("background.jpg").getImage();
+            backgroundImage = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         nextLevelButton = new JButton("Siguiente Nivel");
+        nextLevelButton.setFont(new Font("Arial", Font.BOLD, 18));
         nextLevelButton.addActionListener(e -> {
             if (isLevelCorrect()) {
                 feedbackLabel.setText("¡Correcto!");
@@ -124,21 +127,39 @@ public class MinigamePaintPanel extends JPanel {
 
         feedbackLabel = new JLabel("Haz clic en la cuadrícula para pintar las celdas.");
         feedbackLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        feedbackLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        titleLabel = new JLabel("Tercer minijuego: \"Colorea las vocales\"");
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+
+        subtitleLabel = new JLabel("Con ayuda de las imágenes pinta los cuadrados vacíos para dibujar las vocales");
+        subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 18));
 
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        controlPanel.setOpaque(false);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        feedbackLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nextLevelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        controlPanel.add(titleLabel);
+        controlPanel.add(subtitleLabel);
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         controlPanel.add(feedbackLabel);
         controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         controlPanel.add(nextLevelButton);
-        controlPanel.setOpaque(false);
 
-        add(controlPanel, BorderLayout.SOUTH);
+        add(controlPanel, BorderLayout.NORTH);
 
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int row = (e.getY() - 100) / CELL_SIZE;
-                int col = (e.getX() - 100) / CELL_SIZE;
+                int offsetX = (getWidth() - GRID_COLS[level] * CELL_SIZE) / 2;
+                int offsetY = (getHeight() - GRID_ROWS[level] * CELL_SIZE) / 2;
+                int row = (e.getY() - offsetY) / CELL_SIZE;
+                int col = (e.getX() - offsetX) / CELL_SIZE;
                 if (row >= 0 && row < GRID_ROWS[level] && col >= 0 && col < GRID_COLS[level] && !paintedCells[row][col]) {
                     paintedCells[row][col] = true;
                     totalClicks++;
@@ -224,11 +245,11 @@ public class MinigamePaintPanel extends JPanel {
         double accuracy = ((double) correctClicks / totalClicks) * 100;
         JOptionPane.showMessageDialog(this,
                 "Aciertos: " + correctClicks + "\n" +
-                "Errores: " + (totalClicks - correctClicks) + "\n" +
-                "Porcentaje de efectividad: " + String.format("%.2f", accuracy) + "%",
+                        "Errores: " + (totalClicks - correctClicks) + "\n" +
+                        "Porcentaje de efectividad: " + String.format("%.2f", accuracy) + "%",
                 "Evaluación",
                 JOptionPane.INFORMATION_MESSAGE);
-        parentPanel.getGame().showPanel("Evaluation");
+        parentPanel.showMinigame("minigamesMenu");
     }
 
     @Override
@@ -239,17 +260,16 @@ public class MinigamePaintPanel extends JPanel {
         }
         int offsetX = (getWidth() - GRID_COLS[level] * CELL_SIZE) / 2;
         int offsetY = (getHeight() - GRID_ROWS[level] * CELL_SIZE) / 2;
-
         for (int row = 0; row < GRID_ROWS[level]; row++) {
             for (int col = 0; col < GRID_COLS[level]; col++) {
-                if (paintedCells[row][col]) {
-                    g.setColor(Color.BLUE);
-                } else {
-                    g.setColor(Color.LIGHT_GRAY);
-                }
-                g.fillRect(offsetX + col * CELL_SIZE, offsetY + row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                int x = offsetX + col * CELL_SIZE;
+                int y = offsetY + row * CELL_SIZE;
                 g.setColor(Color.BLACK);
-                g.drawRect(offsetX + col * CELL_SIZE, offsetY + row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                g.drawRect(x, y, CELL_SIZE, CELL_SIZE);
+                if (paintedCells[row][col]) {
+                    g.setColor(Color.YELLOW);
+                    g.fillRect(x + 1, y + 1, CELL_SIZE - 1, CELL_SIZE - 1);
+                }
             }
         }
     }
