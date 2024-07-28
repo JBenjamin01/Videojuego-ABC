@@ -43,7 +43,8 @@ public class MinigameCompletePanel extends JPanel {
 
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
-        exerciseArea.setFont(new Font("Serif", Font.PLAIN, 48));
+        exerciseArea.setBorder(BorderFactory.createEmptyBorder(50, 40, 0, 0));
+        exerciseArea.setFont(new Font("Serif", Font.PLAIN, 60));
         exerciseArea.setText(getCurrentExercise());
         exerciseArea.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -53,11 +54,17 @@ public class MinigameCompletePanel extends JPanel {
         contentPanel.add(exerciseArea, BorderLayout.NORTH);
 
         // Panel para botones de respuestas
-        JPanel answersPanel = new JPanel(new GridLayout(1, 5, 10, 10)); // Espacio entre botones
-        answersPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Espacio alrededor del panel
+        JPanel answersPanel = new JPanel(new GridLayout(1, 5, 10, 10));
+        answersPanel.setBorder(BorderFactory.createEmptyBorder(70, 40, 130, 40));
         String[] vowels = {"A", "E", "I", "O", "U"};
+        Font buttonFont = new Font("Serif", Font.BOLD, 30);
         for (String vowel : vowels) {
             JButton vowelButton = new JButton(vowel);
+            vowelButton.setFont(buttonFont);
+            vowelButton.setPreferredSize(new Dimension(80, 80));
+            vowelButton.setBackground(Color.WHITE);
+            vowelButton.setBorder(BorderFactory.createLineBorder(Color.BLUE, 3));
+            vowelButton.setFocusPainted(false);
             vowelButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
