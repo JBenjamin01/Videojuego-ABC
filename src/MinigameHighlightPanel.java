@@ -10,36 +10,31 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Clase que representa un panel de minijuego en el que los jugadores deben identificar y marcar las vocales en palabras.
- * El panel muestra una palabra en letras grandes, y el niño debe hacer clic en las letras que son vocales. 
- * Las vocales correctas se resaltan en verde y se reproduce un sonido asociado a la vocal. Las letras no vocales se 
- * resaltan en rojo. Al final de cada palabra, el jugador puede avanzar a la siguiente palabra con un botón. Si todas 
- * las vocales han sido marcadas correctamente, se suma un puntaje. Al completar todas las palabras, se muestran los resultados.
- */
 public class MinigameHighlightPanel extends JPanel {
-    // Variables para el panel
-    private Image fondo; // Imagen de fondo
-    private int totalScore; // Puntaje total acumulado
-    private MinigamesPanel parentPanel; // Referencia al panel padre
-    private JLabel[] letterLabels; // Etiquetas para las letras de la palabra
-    private Map<Character, String> vowelSounds; // Mapa de sonidos para las vocales
-    private static final String[] WORDS = {"ELEFANTE", "UKELELE", "IGLESIA", "OSCURO", "ANILLO"}; // Palabras para el minijuego
-    private int currentWordIndex = 0; // Índice de la palabra actual
-    private JButton nextButton; // Botón para pasar a la siguiente palabra
-    private JButton soundButton; // Botón para reproducir el sonido
-    private int wordScore; // Puntaje para la palabra actual
-    private int totalVowels; // Total de vocales en la palabra actual
-    private int markedVowels; // Total de vocales marcadas por el usuario
+    private Image fondo;
+    private int totalScore;
+    private MinigamesPanel parentPanel;
+    private JLabel[] letterLabels;
+    private Map<Character, String> vowelSounds;
+    private static final String[] WORDS = {"ELEFANTE", "UKELELE", "IGLESIA", "OSCURO", "ANILLO"};
+    private int currentWordIndex = 0;
+    private JButton nextButton;
+    private JButton soundButton;
+    private int wordScore;
+    private int totalVowels;
+    private int markedVowels;
     private JPanel contentPanel; // Panel para el contenido principal
+
+    /**
+ * MinigameHighlightPanel es un panel para un minijuego en el que los usuarios resaltan vocales
+ * Haciendo click cobre las vocales. Incluye colores diferenciadores si te equivocas o aciertas, incluye botones validar respuestas.
+ */
 
     public MinigameHighlightPanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel;
 
-        // Cargar la imagen de fondo
         fondo = new ImageIcon(getClass().getResource("/imagenes/menu.gif")).getImage();
 
-        // Inicializar el mapa de sonidos para cada vocal
         vowelSounds = new LinkedHashMap<>();
         vowelSounds.put('A', "sounds/a.wav");
         vowelSounds.put('E', "sounds/e.wav");
@@ -47,85 +42,67 @@ public class MinigameHighlightPanel extends JPanel {
         vowelSounds.put('O', "sounds/o.wav");
         vowelSounds.put('U', "sounds/u.wav");
 
-        // Configurar el diseño del panel
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout()); // Usar BorderLayout para organizar los componentes
 
-        // Crear el botón para reproducir el sonido
         soundButton = new JButton("Reproducir sonido");
         soundButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playSound("sounds/Cuarto-mini-juego.wav"); // Reproducir sonido del minijuego
+                playSound("sounds/Cuarto-mini-juego.wav");
             }
         });
 
-        // Panel para el botón de sonido
         JPanel soundPanel = new JPanel();
         soundPanel.setOpaque(false);
         soundPanel.add(soundButton);
 
-        // Agregar el panel de sonido al panel principal
         add(soundPanel, BorderLayout.NORTH);
 
-        // Crear el panel para el contenido principal
         contentPanel = new JPanel(new GridBagLayout());
         contentPanel.setOpaque(false);
         add(contentPanel, BorderLayout.CENTER);
 
-        // Crear el botón para pasar a la siguiente palabra
         nextButton = new JButton(new ImageIcon(getClass().getResource("/imagenes/siguiente.png")));
         nextButton.setBorderPainted(false);
         nextButton.setContentAreaFilled(false);
-        nextButton.addActionListener(e -> goToNextWord()); // Acción para pasar a la siguiente palabra
+        nextButton.addActionListener(e -> goToNextWord());
 
-        // Mostrar la primera palabra
         displayCurrentWord();
     }
 
-    /**
-     * Muestra la palabra actual en el panel, desglosada en letras individuales.
-     * Las letras son configuradas para que el usuario pueda hacer clic en ellas.
-     */
     private void displayCurrentWord() {
-        contentPanel.removeAll(); // Limpiar el panel de contenido
-        String word = WORDS[currentWordIndex]; // Obtener la palabra actual
-        letterLabels = new JLabel[word.length()]; // Crear una etiqueta por cada letra
-        wordScore = 0; // Resetear el puntaje de la palabra
-        totalVowels = 0; // Resetear el conteo de vocales
-        markedVowels = 0; // Resetear el conteo de vocales marcadas
+        contentPanel.removeAll();
+        String word = WORDS[currentWordIndex];
+        letterLabels = new JLabel[word.length()];
+        wordScore = 0;
+        totalVowels = 0;
+        markedVowels = 0;
 
-        // Configurar restricciones de diseño para el GridBagLayout
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
 
-        // Crear y agregar etiquetas de letras al panel de contenido
         for (int i = 0; i < word.length(); i++) {
             letterLabels[i] = createLetterLabel(word.charAt(i));
             if (isVowel(word.charAt(i))) {
-                totalVowels++; // Contar las vocales
+                totalVowels++;
             }
             gbc.gridx = i;
             contentPanel.add(letterLabels[i], gbc);
         }
 
-        // Configurar el botón de siguiente y agregarlo al panel
         gbc.gridy = 1;
         gbc.gridx = 0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.insets = new Insets(30, 10, 10, 10);
         contentPanel.add(nextButton, gbc);
 
-        contentPanel.revalidate(); // Actualizar el panel de contenido
-        contentPanel.repaint(); // Redibujar el panel de contenido
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
 
-    /**
-     * Crea una etiqueta para una letra con un formato específico.
-     * La etiqueta muestra la letra y responde a eventos de clic del mouse.
-     */
     private JLabel createLetterLabel(char letter) {
         JLabel label = new JLabel(String.valueOf(letter), SwingConstants.CENTER);
         label.setFont(new Font("Cooper Black", Font.PLAIN, 70));
@@ -133,16 +110,13 @@ public class MinigameHighlightPanel extends JPanel {
         label.setOpaque(true);
         label.setBackground(Color.WHITE);
         label.setPreferredSize(new Dimension(150, 150));
-        label.addMouseListener(new HighlightMouseAdapter(label, letter)); // Agregar listener para eventos de clic
+        label.addMouseListener(new HighlightMouseAdapter(label, letter));
         return label;
     }
 
-    /**
-     * Adaptador de mouse para resaltar letras al hacer clic.
-     */
     private class HighlightMouseAdapter extends MouseAdapter {
-        private JLabel label; // Etiqueta de la letra
-        private char letter; // Letra asociada
+        private JLabel label;
+        private char letter;
 
         public HighlightMouseAdapter(JLabel label, char letter) {
             this.label = label;
@@ -152,32 +126,23 @@ public class MinigameHighlightPanel extends JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            if (label.getBackground() == Color.WHITE) { // Si la letra no ha sido marcada
+            if (label.getBackground() == Color.WHITE) {
                 if (isVowel(letter)) {
-                    label.setBackground(Color.GREEN); // Marcar vocales en verde
-                    playSound(vowelSounds.get(letter)); // Reproducir sonido de la vocal
-                    markedVowels++; // Incrementar el conteo de vocales marcadas
+                    label.setBackground(Color.GREEN);
+                    playSound(vowelSounds.get(letter));
+                    markedVowels++;
                 } else {
-                    label.setBackground(Color.RED); // Marcar letras no vocales en rojo
+                    label.setBackground(Color.RED);
                 }
-                label.removeMouseListener(this); // Remover el listener para evitar marcar la misma letra varias veces
+                label.removeMouseListener(this);
             }
         }
     }
 
-    /**
-     * Verifica si un carácter es una vocal.
-     *
-     * @param c El carácter a verificar
-     * @return true si el carácter es una vocal, false en caso contrario
-     */
     private boolean isVowel(char c) {
         return "AEIOUaeiou".indexOf(c) != -1;
     }
 
-    /**
-     * Reproduce un archivo de sonido especificado.
-     */
     private void playSound(String soundFile) {
         try {
             File audioFile = new File(soundFile);
@@ -190,46 +155,37 @@ public class MinigameHighlightPanel extends JPanel {
         }
     }
 
-    /**
-     * Avanza a la siguiente palabra o muestra los resultados si se han completado todas.
-     */
     private void goToNextWord() {
         if (markedVowels == totalVowels) {
-            wordScore = 1; // Puntaje completo si todas las vocales están marcadas
+            wordScore = 1;
         } else {
-            wordScore = 0; // Puntaje cero si no se han marcado todas las vocales
+            wordScore = 0;
         }
 
-        totalScore += wordScore; // Acumular puntaje total
+        totalScore += wordScore;
 
         if (currentWordIndex < WORDS.length - 1) {
-            currentWordIndex++; // Avanzar al siguiente índice de palabra
-            displayCurrentWord(); // Mostrar la siguiente palabra
+            currentWordIndex++;
+            displayCurrentWord();
         } else {
-            showResults(); // Mostrar resultados al completar todas las palabras
+            showResults();
         }
     }
 
-    /**
-     * Muestra los resultados del minijuego y reinicia el índice de palabras.
-     */
     private void showResults() {
-        ScoreManager.getInstance().increaseScore(totalScore); // Incrementar el puntaje total en el gestor de puntajes
+        ScoreManager.getInstance().increaseScore(totalScore);
         JOptionPane.showMessageDialog(this,
             "Resultados del Minijuego:\n" +
-            "Puntaje del ejercicio: " + totalScore); // Mostrar mensaje con el puntaje
-        currentWordIndex = 0; // Reiniciar el índice de palabras
-        parentPanel.getGame().showPanel("Results"); // Mostrar el panel de resultados en el juego
+            "Puntaje del ejercicio: " + totalScore);
+        currentWordIndex = 0;
+        parentPanel.getGame().showPanel("Results");
     }
 
-    /**
-     * Dibuja la imagen de fondo en el panel.
-     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (fondo != null) {
-            g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this); // Dibujar la imagen de fondo
+            g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
         }
     }
 }
