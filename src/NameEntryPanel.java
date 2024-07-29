@@ -9,6 +9,7 @@ public class NameEntryPanel extends JPanel {
     private JTextField nameField;
     private JButton startButton;
     private Game game;
+    private JDialog dialog;
 
     public NameEntryPanel(Game game) {
         this.game = game;
@@ -20,7 +21,6 @@ public class NameEntryPanel extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;
 
-        // Panel para la entrada del nombre
         JPanel inputPanel = new JPanel();
         inputPanel.setOpaque(false);
         inputPanel.setLayout(new GridBagLayout());
@@ -36,12 +36,12 @@ public class NameEntryPanel extends JPanel {
         inputPanel.add(nameLabel, inputGbc);
 
         nameField = new JTextField(30);
-        nameField.setFont(new Font("Cooper Black", Font.PLAIN, 45));
+        nameField.setFont(new Font("Serif", Font.PLAIN, 45));
         inputGbc.gridy = 1;
         inputPanel.add(nameField, inputGbc);
 
         startButton = new JButton("Empezar");
-        startButton.setFont(new Font("Cooper Black", Font.PLAIN, 40));
+        startButton.setFont(new Font("Serif", Font.PLAIN, 40));
         startButton.setFocusPainted(false);
         startButton.setBackground(new Color(0, 102, 204));
         startButton.setForeground(Color.WHITE);
@@ -55,9 +55,10 @@ public class NameEntryPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String playerName = nameField.getText().trim();
                 if (!playerName.isEmpty()) {
-                    // Guardar el nombre del jugador en el juego
                     game.setPlayerName(playerName);
-                    // Mostrar el panel de menú
+                    if (dialog != null) {
+                        dialog.dispose();
+                    }
                     game.showPanel("CharacterSelection");
                 } else {
                     JOptionPane.showMessageDialog(NameEntryPanel.this, "Por favor ingresa un nombre.", "Nombre requerido", JOptionPane.WARNING_MESSAGE);
@@ -70,6 +71,10 @@ public class NameEntryPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(inputPanel, gbc);
+    }
+
+    public void setDialog(JDialog dialog) {
+        this.dialog = dialog;
     }
 
     @Override
