@@ -28,7 +28,7 @@ public class MinigameHighlightPanel extends JPanel {
     public MinigameHighlightPanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel;
 
-        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+        fondo = new ImageIcon(getClass().getResource("/imagenes/menu.gif")).getImage();
 
         vowelSounds = new LinkedHashMap<>();
         vowelSounds.put('A', "sounds/a.wav");

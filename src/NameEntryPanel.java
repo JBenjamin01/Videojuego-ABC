@@ -12,7 +12,7 @@ public class NameEntryPanel extends JPanel {
 
     public NameEntryPanel(Game game) {
         this.game = game;
-        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+        fondo = new ImageIcon(getClass().getResource("/imagenes/menu.gif")).getImage();
         setLayout(new GridBagLayout());
         setOpaque(false);
 
@@ -29,7 +29,7 @@ public class NameEntryPanel extends JPanel {
         inputGbc.anchor = GridBagConstraints.CENTER;
 
         JLabel nameLabel = new JLabel("Ingresa tu nombre:");
-        nameLabel.setFont(new Font("Serif", Font.PLAIN, 70));
+        nameLabel.setFont(new Font("Cooper Black", Font.PLAIN, 70));
         nameLabel.setForeground(Color.BLACK);
         inputGbc.gridx = 0;
         inputGbc.gridy = 0;
