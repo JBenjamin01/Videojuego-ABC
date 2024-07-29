@@ -1,3 +1,8 @@
+/**
+ * VowelLearningPanel crea una interfaz gráfica para que los niños aprendan las vocales.
+ * Presenta botones para cada vocal que reproducen el sonido correspondiente al hacer clic, un fondo
+ * y un botón "Siguiente" para avanzar en el juego.
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,35 +33,35 @@ public class VowelLearningPanel extends JPanel {
         setLayout(new BorderLayout());
 
         // Panel para el título
-        JPanel panelTitulo = new JPanel();
-        panelTitulo.setOpaque(false); // Hacer transparente el panel
-        ImageIcon tituloIcon = new ImageIcon(getClass().getResource("/imagenes/vocalesTitulo.png"));
-        JLabel tituloLabel = new JLabel(tituloIcon);
-        panelTitulo.add(tituloLabel);
+        JPanel panelTitle = new JPanel();
+        panelTitle.setOpaque(false); // Hacer transparente el panel
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/vocalesTitulo.png"));
+        JLabel titleLabel = new JLabel(icon);
+        panelTitle.add(titleLabel);
         
         // Panel para las vocales
-        JPanel panelVocales = new JPanel();
-        panelVocales.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Ajustar espacio entre botones
-        panelVocales.setOpaque(false); // Hacer transparente el panel
+        JPanel panelVowels = new JPanel();
+        panelVowels.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Ajustar espacio entre botones
+        panelVowels.setOpaque(false); // Hacer transparente el panel
         for (String vocal : sonidosVocales.keySet()) {
-            JButton vocalesBtn = new JButton(vocal);
-            vocalesBtn.setFont(new Font("Cooper Black", Font.PLAIN, 100)); // Establecemos el decorado del texto
-            vocalesBtn.setPreferredSize(new Dimension(200, 200)); // Ajustar el tamaño de los botones
-            vocalesBtn.addActionListener(new ActionListener() {
+            JButton vowelsBtn = new JButton(vocal);
+            vowelsBtn.setFont(new Font("Cooper Black", Font.PLAIN, 100)); // Establecemos el decorado del texto
+            vowelsBtn.setPreferredSize(new Dimension(200, 200)); // Ajustar el tamaño de los botones
+            vowelsBtn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    playSound(sonidosVocales.get(vocal)); // Al ser presionados se ejecuta el archivo de sonido
+                    playSound(sonidosVocales.get(vocal)); //Ejecución del archivo de sonido
                 }
             });
-            panelVocales.add(vocalesBtn);
+            panelVowels.add(vowelsBtn);
         }
 
         // Panel intermedio para centrar el panelVocales verticalmente
-        JPanel panelCentro = new JPanel();
-        panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
-        panelCentro.setOpaque(false); // Hacer transparente el panel
-        panelCentro.add(Box.createVerticalGlue()); // Añadir espacio elástico arriba
-        panelCentro.add(panelVocales); // Añadir panelVocales al panelCentro
-        panelCentro.add(Box.createVerticalGlue()); // Añadir espacio elástico abajo
+        JPanel panelCenter = new JPanel();
+        panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
+        panelCenter.setOpaque(false); // Hacer transparente el panel
+        panelCenter.add(Box.createVerticalGlue()); // Añadir espacio elástico arriba
+        panelCenter.add(panelVowels); // Añadir panelVocales al panelCentro
+        panelCenter.add(Box.createVerticalGlue()); // Añadir espacio elástico abajo
 
         // Botón Siguiente
         JButton siguienteBtn = new JButton("Siguiente");
@@ -68,8 +73,8 @@ public class VowelLearningPanel extends JPanel {
         });
 
         // Añadir paneles al panel principal
-        add(panelTitulo, BorderLayout.NORTH);
-        add(panelCentro, BorderLayout.CENTER);
+        add(panelTitle, BorderLayout.NORTH);
+        add(panelCenter, BorderLayout.CENTER);
         add(siguienteBtn, BorderLayout.SOUTH);
     }
 

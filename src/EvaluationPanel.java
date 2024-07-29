@@ -1,3 +1,9 @@
+/**
+ * EvaluationPanel es un panel de evaluación interactivo para niños,
+ * donde se les presentan ejercicios para completar palabras faltantes con vocales.
+ * Los ejercicios incluyen la visualización de una imagen relacionada
+ * y la reproducción del sonido correspondiente cuando se completa correctamente un ejercicio.
+ */
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
