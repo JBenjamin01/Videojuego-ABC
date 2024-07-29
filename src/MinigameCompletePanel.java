@@ -22,7 +22,7 @@ public class MinigameCompletePanel extends JPanel {
         this.parentPanel = parentPanel; // Asignar la referencia
 
         // Añadir la imagen de fondo
-        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+        fondo = new ImageIcon(getClass().getResource("/imagenes/menu.gif")).getImage();
 
         vowelSounds = new LinkedHashMap<>();
         vowelSounds.put("A", "sounds/a.wav");
