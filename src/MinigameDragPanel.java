@@ -9,19 +9,33 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+/**
+ * La clase MinigameDragPanel es un panel de minijuego que permite arrastrar y soltar vocales en una cuadrícula.
+ * Incluye la funcionalidad para reproducir sonidos asociados a cada vocal y validar el orden
+ * en que las vocales son colocadas en la cuadrícula.
+ * 
+ * El panel contiene:
+ * - Un área de arrastre (dragPanel) donde se colocan las vocales.
+ * - Una cuadrícula (gridPanel) donde se arrastran las vocales.
+ * - Un botón para reproducir el sonido del primer ejercicio.
+ * - Un botón para validar el orden de las vocales en la cuadrícula.
+ */
+
 public class MinigameDragPanel extends JPanel {
     private MinigamesPanel parentPanel; // Referencia al panel de minijuegos
-    private JPanel gridPanel;
-    private JPanel dragPanel;
-    private Map<String, JLabel> gridLabels;
-    private Image fondo;
-    private Map<String, String> vowelSounds;
+    private JPanel gridPanel; // Panel que contiene la cuadrícula de vocales
+    private JPanel dragPanel; // Panel que contiene las vocales que se pueden arrastrar
+    private Map<String, JLabel> gridLabels; // Etiquetas de la cuadrícula
+    private Image fondo; // Imagen de fondo
+    private Map<String, String> vowelSounds; // Mapa de sonidos para las vocales
 
     public MinigameDragPanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel;
 
+        // Cargar la imagen de fondo
         fondo = new ImageIcon(getClass().getResource("/imagenes/menu.gif")).getImage();
 
+        // Inicializar los sonidos de las vocales
         vowelSounds = new LinkedHashMap<>();
         vowelSounds.put("A", "sounds/a.wav");
         vowelSounds.put("E", "sounds/e.wav");
@@ -31,6 +45,7 @@ public class MinigameDragPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
+        // Crear un botón para reproducir el sonido del primer ejercicio
         JButton soundButton = new JButton("Primer ejercicio");
         soundButton.setFont(new Font("Cooper Black", Font.BOLD, 20));
         soundButton.addActionListener(new ActionListener() {
@@ -57,13 +72,13 @@ public class MinigameDragPanel extends JPanel {
         JPanel gridPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         gridPanelContainer.setOpaque(false);
 
-        // Panel para las vocales
+        // Panel para las vocales arrastrables
         dragPanel = new JPanel();
         dragPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
         dragPanel.setOpaque(false);
         dragPanel.setPreferredSize(new Dimension(1200, 400));
 
-        // Panel para la cuadrícula
+        // Panel para la cuadrícula de colocación de vocales
         gridPanel = new JPanel(new GridLayout(1, 5, 30, 30));
         gridPanel.setOpaque(false);
         gridPanel.setPreferredSize(new Dimension(1200, 300));
@@ -72,6 +87,7 @@ public class MinigameDragPanel extends JPanel {
         Dimension labelSize = new Dimension(100, 200);
         Font labelFont = new Font("Cooper Black", Font.BOLD, 60);
 
+        // Crear etiquetas para la cuadrícula
         for (int i = 0; i < 5; i++) {
             JLabel gridLabel = new JLabel("", SwingConstants.CENTER);
             gridLabel.setFont(labelFont);
@@ -84,6 +100,7 @@ public class MinigameDragPanel extends JPanel {
             gridPanel.add(gridLabel);
         }
 
+        // Crear etiquetas para las vocales arrastrables y añadir eventos de arrastre
         java.util.List<String> vowels = Arrays.asList("A", "E", "I", "O", "U");
         Collections.shuffle(vowels);
 
@@ -101,12 +118,13 @@ public class MinigameDragPanel extends JPanel {
                     JComponent c = (JComponent) e.getSource();
                     TransferHandler handler = c.getTransferHandler();
                     handler.exportAsDrag(c, e, TransferHandler.COPY);
-                    playSound(vowelSounds.get(vowel)); // Reproducir sonido
+                    playSound(vowelSounds.get(vowel)); // Reproducir sonido al arrastrar
                 }
             });
             dragPanel.add(dragLabel);
         }
 
+        // Crear botón para validar el orden de las vocales en la cuadrícula
         JButton validateButton = new JButton(new ImageIcon(getClass().getResource("/imagenes/siguiente.png")));
         validateButton.setBorderPainted(false);
         validateButton.setContentAreaFilled(false);
@@ -136,6 +154,11 @@ public class MinigameDragPanel extends JPanel {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Valida el orden de las vocales en la cuadrícula comparándolas con el orden correcto.
+     * Actualiza el puntaje y muestra una ventana de diálogo con la puntuación.
+     */
+
     private void validateOrder() {
         String[] correctOrder = {"A", "E", "I", "O", "U"};
         int score = 0;
@@ -152,6 +175,8 @@ public class MinigameDragPanel extends JPanel {
         JOptionPane.showMessageDialog(this, "Puntuación: " + score + " puntos.");
         parentPanel.showMinigame("Paint");
     }
+
+    // Reproduce un archivo de sonido.
 
     private void playSound(String soundFile) {
         try {
