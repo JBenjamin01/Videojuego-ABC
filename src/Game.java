@@ -10,8 +10,7 @@ import java.io.File;
 public class Game extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    private String selectedCharacter;
-
+    private String personajeEscojido;
     public Game() {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
@@ -44,20 +43,20 @@ public class Game extends JFrame {
         mainPanel.add(new ResultsPanel(this), "Results"); 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 600);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.add(mainPanel);
         this.setVisible(true);
     }
 
-    public void selectCharacter(String characterName) {
+    public void selectCharacter(String characterName, String ruta) {
         // Almacena el personaje seleccionado
-        this.selectedCharacter = characterName;
+        this.personajeEscojido = ruta;
         System.out.println("Personaje seleccionado: " + characterName);
         showPanel("VowelLearning");
     }
 
     public String getSelectedCharacter() {
-        return selectedCharacter;
+        return personajeEscojido;
     }
 
     public void showPanel(String panelName) {

@@ -10,7 +10,6 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.io.File;
 
 public class CharacterSelectionPanel extends JPanel {
     private Image fondo;
@@ -49,10 +48,10 @@ public class CharacterSelectionPanel extends JPanel {
         Image image = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH); 
         JButton button = new JButton(new ImageIcon(image));
         button.setPreferredSize(new java.awt.Dimension(160, 160));
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.selectCharacter(characterName);
+                game.selectCharacter(characterName, imagePath);
             }
         });
         return button;

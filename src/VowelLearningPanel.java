@@ -33,14 +33,15 @@ public class VowelLearningPanel extends JPanel {
         panelVocales.setOpaque(false); //Hacer transparente el panel
         for (String vocal : sonidosVocales.keySet()) {
             JButton vocalesBtn = new JButton(vocal);
-            vocalesBtn.setFont(new Font("Cooper Black", Font.PLAIN, 30)); //Establecemos el decorado del texto
-            vocalesBtn.setPreferredSize(new Dimension(150, 150)); //Ajustar el tamaño de los botones
+            vocalesBtn.setFont(new Font("Cooper Black", Font.PLAIN, 100)); //Establecemos el decorado del texto
+            vocalesBtn.setPreferredSize(new Dimension(200, 200)); //Ajustar el tamaño de los botones
             vocalesBtn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     playSound(sonidosVocales.get(vocal)); //Al ser presionados se ejecuta el archivo de sonido
                 }
             });
             panelVocales.add(vocalesBtn);
+            
         }
 
         //Botón Siguiente
@@ -51,8 +52,7 @@ public class VowelLearningPanel extends JPanel {
                 game.showPanel("Evaluation");
             }
         });
-        //
-        add(panelVocales, BorderLayout.CENTER);
+        add(panelVocales, BorderLayout.NORTH);
         add(siguienteBtn, BorderLayout.SOUTH);
     }
 
