@@ -5,8 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MinigameCompletePanel extends JPanel {
     private Image fondo;
@@ -18,6 +17,7 @@ public class MinigameCompletePanel extends JPanel {
     private int incorrectAnswers = 0; // Contador de respuestas incorrectas
     private MinigamesPanel parentPanel; // Referencia al panel de minijuegos
 
+    // Constructor
     public MinigameCompletePanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel; // Asignar la referencia
 
@@ -34,12 +34,7 @@ public class MinigameCompletePanel extends JPanel {
         setLayout(new BorderLayout());
 
         // Inicializar los ejercicios
-        exercises = new LinkedHashMap<>();
-        exercises.put("_MIG_", "AMIGO");
-        exercises.put("S_NT_MIENT_", "SENTIMIENTO");
-        exercises.put("_BUEL_", "ABUELO");
-        exercises.put("C_RAZ_N", "CORAZON");
-        exercises.put("C_L_GI_", "COLEGIO");
+        exercises = getRandomExercises();
 
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
@@ -92,6 +87,37 @@ public class MinigameCompletePanel extends JPanel {
 
         add(soundPanel, BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
+    }
+
+    // Función para obtener ejercicios aleatorios
+    private Map<String, String> getRandomExercises() {
+        Map<String, String> allExercises = new LinkedHashMap<>();
+        allExercises.put("_MIG_", "AMIGO");
+        allExercises.put("S_NT_MI_NT_", "SENTIMIENTO");
+        allExercises.put("_B_EL_", "ABUELO");
+        allExercises.put("COR_Z_N", "CORAZON");
+        allExercises.put("C_L_GI_", "COLEGIO");
+        allExercises.put("M_S_", "MESA");
+        allExercises.put("S_P_", "SAPO");
+        allExercises.put("F_L_N_", "FELINO");
+        allExercises.put("T_R_A", "TAREA");
+        allExercises.put("D_R_ZN_", "DURAZNO");
+        allExercises.put("P_N_T_N", "PANETON");
+        allExercises.put("B_RR_R", "BARRER");
+        allExercises.put("V_L_A", "VELA");
+        allExercises.put("C_LC__", "CALCIO");
+        allExercises.put("GR_C__", "GRACIA");
+
+        // Seleccionar 5 ejercicios aleatorios de los 15 disponibles
+        java.util.List<String> keys = new ArrayList<>(allExercises.keySet());
+        Collections.shuffle(keys);
+        Map<String, String> selectedExercises = new LinkedHashMap<>();
+        for (int i = 0; i < 5; i++) {
+            String key = keys.get(i);
+            selectedExercises.put(key, allExercises.get(key));
+        }
+
+        return selectedExercises;
     }
 
     private String getCurrentExercise() {
@@ -152,7 +178,7 @@ public class MinigameCompletePanel extends JPanel {
         ScoreManager.getInstance().increaseScore(correctAnswers);
 
         int totalExercises = correctAnswers + incorrectAnswers;
-        double successRate = (correctAnswers / (double) totalExercises) * 100;
+        double successRate = (totalExercises == 0) ? 0 : (correctAnswers / (double) totalExercises) * 100;
 
         JOptionPane.showMessageDialog(this, 
             "Resultados del Minijuego:\n" +
