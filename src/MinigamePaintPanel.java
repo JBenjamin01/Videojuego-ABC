@@ -155,13 +155,13 @@ public class MinigamePaintPanel extends JPanel {
         soundButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         controlPanel.add(titleLabel);
         controlPanel.add(subtitleLabel);
-        controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         controlPanel.add(feedbackLabel);
         controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        controlPanel.add(nextLevelButton);
-        controlPanel.add(soundButton);
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        controlPanel.add(soundButton, BorderLayout.SOUTH);
 
-        add(controlPanel, BorderLayout.NORTH);
+        add(controlPanel, BorderLayout.CENTER);
+        add(nextLevelButton, BorderLayout.SOUTH);
 
         addMouseListener(new MouseAdapter() {
             @Override
