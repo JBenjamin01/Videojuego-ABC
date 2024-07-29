@@ -14,7 +14,7 @@ public class ResultsPanel extends JPanel {
 
     public ResultsPanel(Game game) {
         this.game = game;
-        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+        fondo = new ImageIcon(getClass().getResource("/imagenes/menu.gif")).getImage();
 
         setLayout(new BorderLayout());
         setOpaque(false);

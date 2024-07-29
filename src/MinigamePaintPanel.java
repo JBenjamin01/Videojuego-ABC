@@ -106,7 +106,7 @@ public class MinigamePaintPanel extends JPanel {
         paintedCells = new boolean[GRID_ROWS[level]][GRID_COLS[level]];
 
         try {
-            backgroundImage = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+            backgroundImage = new ImageIcon(getClass().getResource("/imagenes/menu.gif")).getImage();
         } catch (Exception e) {
             e.printStackTrace();
         }
