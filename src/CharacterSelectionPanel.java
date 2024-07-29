@@ -1,7 +1,3 @@
-/**
- * CharacterSelectionPanel crea una interfaz gráfica para que los niños seleccionen un personaje.
- * Presenta botones para cada personaje, una imagen de fondo, y un mensaje de selección de personajes (en la terminal).
- */
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -17,6 +13,11 @@ import javax.swing.ImageIcon;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.geom.RoundRectangle2D;
+
+/**
+ * CharacterSelectionPanel crea una interfaz gráfica para que los niños seleccionen un personaje.
+ * Presenta botones para cada personaje, una imagen de fondo, y un mensaje de selección de personajes (en la terminal).
+ */
 
 public class CharacterSelectionPanel extends JPanel {
     private Image fondo;

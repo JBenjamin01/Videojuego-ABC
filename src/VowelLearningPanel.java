@@ -1,8 +1,3 @@
-/**
- * VowelLearningPanel crea una interfaz gráfica para que los niños aprendan las vocales.
- * Presenta botones para cada vocal que reproducen el sonido correspondiente al hacer clic, un fondo
- * y un botón "Siguiente" para avanzar en el juego.
- */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +7,12 @@ import java.util.Map;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+
+/**
+ * VowelLearningPanel crea una interfaz gráfica para que los niños aprendan las vocales.
+ * Presenta botones para cada vocal que reproducen el sonido correspondiente al hacer clic, un fondo
+ * y un botón "Siguiente" para avanzar en el juego.
+ */
 
 public class VowelLearningPanel extends JPanel {
 
