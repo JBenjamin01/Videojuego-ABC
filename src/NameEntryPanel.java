@@ -36,12 +36,12 @@ public class NameEntryPanel extends JPanel {
         inputPanel.add(nameLabel, inputGbc);
 
         nameField = new JTextField(30);
-        nameField.setFont(new Font("Serif", Font.PLAIN, 45));
+        nameField.setFont(new Font("Cooper Black", Font.PLAIN, 45));
         inputGbc.gridy = 1;
         inputPanel.add(nameField, inputGbc);
 
         startButton = new JButton("Empezar");
-        startButton.setFont(new Font("Serif", Font.PLAIN, 40));
+        startButton.setFont(new Font("Cooper Black", Font.PLAIN, 40));
         startButton.setFocusPainted(false);
         startButton.setBackground(new Color(0, 102, 204));
         startButton.setForeground(Color.WHITE);

@@ -21,13 +21,13 @@ public class ResultsPanel extends JPanel {
 
         // Title
         JLabel scoreLabel = new JLabel("Tu examen ha terminado", SwingConstants.CENTER);
-        scoreLabel.setFont(new Font("Serif", Font.BOLD, 80));
+        scoreLabel.setFont(new Font("Cooper Black", Font.BOLD, 80));
         scoreLabel.setForeground(Color.BLACK);
         add(scoreLabel, BorderLayout.NORTH);
 
         // Score Details
         scoreDetails = new JLabel("", SwingConstants.CENTER);
-        scoreDetails.setFont(new Font("Serif", Font.PLAIN, 80));
+        scoreDetails.setFont(new Font("Cooper Black", Font.PLAIN, 80));
         scoreDetails.setForeground(Color.BLACK);
         add(scoreDetails, BorderLayout.CENTER);
 
@@ -37,7 +37,7 @@ public class ResultsPanel extends JPanel {
         buttonPanel.setLayout(new FlowLayout());
 
         JButton showScoreButton = new JButton("Mostrar Puntaje");
-        showScoreButton.setFont(new Font("Serif", Font.PLAIN, 30));
+        showScoreButton.setFont(new Font("Cooper Black", Font.PLAIN, 30));
         showScoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,7 +48,7 @@ public class ResultsPanel extends JPanel {
         buttonPanel.add(showScoreButton);
 
         JButton backButton = new JButton("Volver al Menú");
-        backButton.setFont(new Font("Serif", Font.PLAIN, 30));
+        backButton.setFont(new Font("Cooper Black", Font.PLAIN, 30));
         backButton.addActionListener(e -> game.showPanel("Menu"));
         buttonPanel.add(backButton);
 

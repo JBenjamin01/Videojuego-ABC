@@ -99,7 +99,7 @@ public class MinigameHighlightPanel extends JPanel {
 
     private JLabel createLetterLabel(char letter) {
         JLabel label = new JLabel(String.valueOf(letter), SwingConstants.CENTER);
-        label.setFont(new Font("Serif", Font.PLAIN, 48));
+        label.setFont(new Font("Cooper Black", Font.PLAIN, 48));
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         label.setOpaque(true);
         label.setBackground(Color.WHITE);

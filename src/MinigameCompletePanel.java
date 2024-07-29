@@ -44,7 +44,7 @@ public class MinigameCompletePanel extends JPanel {
         // Área para mostrar los ejercicios
         exerciseArea = new JLabel();
         exerciseArea.setBorder(BorderFactory.createEmptyBorder(50, 40, 0, 0));
-        exerciseArea.setFont(new Font("Serif", Font.PLAIN, 60));
+        exerciseArea.setFont(new Font("Cooper Black", Font.PLAIN, 60));
         exerciseArea.setText(getCurrentExercise());
         exerciseArea.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -57,7 +57,7 @@ public class MinigameCompletePanel extends JPanel {
         JPanel answersPanel = new JPanel(new GridLayout(1, 5, 10, 10));
         answersPanel.setBorder(BorderFactory.createEmptyBorder(70, 40, 130, 40));
         String[] vowels = {"A", "E", "I", "O", "U"};
-        Font buttonFont = new Font("Serif", Font.BOLD, 30);
+        Font buttonFont = new Font("Cooper Black", Font.BOLD, 30);
         for (String vowel : vowels) {
             JButton vowelButton = new JButton(vowel);
             vowelButton.setFont(buttonFont);

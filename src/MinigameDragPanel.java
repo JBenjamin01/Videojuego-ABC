@@ -69,7 +69,7 @@ public class MinigameDragPanel extends JPanel {
 
         gridLabels = new HashMap<>();
         Dimension labelSize = new Dimension(50, 160);
-        Font labelFont = new Font("Serif", Font.BOLD, 40);
+        Font labelFont = new Font("Cooper Black", Font.BOLD, 40);
 
         for (int i = 0; i < 5; i++) {
             JLabel gridLabel = new JLabel("", SwingConstants.CENTER);
@@ -88,7 +88,7 @@ public class MinigameDragPanel extends JPanel {
 
         for (String vowel : vowels) {
             JLabel dragLabel = new JLabel(vowel, SwingConstants.CENTER);
-            dragLabel.setFont(new Font("Serif", Font.BOLD, 24));
+            dragLabel.setFont(new Font("Cooper Black", Font.BOLD, 24));
             dragLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
             dragLabel.setOpaque(true);
             dragLabel.setBackground(Color.WHITE);
