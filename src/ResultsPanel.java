@@ -42,7 +42,7 @@ public class ResultsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateScore();
-                //insertScoreIntoDatabase();
+                insertScoreIntoDatabase();
             }
         });
         buttonPanel.add(showScoreButton);
@@ -57,18 +57,20 @@ public class ResultsPanel extends JPanel {
 
     private void updateScore() {
         int finalScore = ScoreManager.getInstance().getScore();
-        scoreDetails.setText(String.format("Puntaje final: %d/%d", finalScore, MAX_SCORE));
+        String playerName = game.getPlayerName();
+        scoreDetails.setText(String.format("Puntaje final de %s: %d/%d", playerName, finalScore, MAX_SCORE));
         revalidate();
         repaint();
     }
 
     private void insertScoreIntoDatabase() {
         int finalScore = ScoreManager.getInstance().getScore();
+        String playerName = game.getPlayerName();
         Connection connection = DatabaseConnection.getInstance().getConnection();
-
-        String sql = "INSERT INTO .....";
+    
+        String sql = "INSERT INTO puntuacion (nombre, puntaje) VALUES (?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, "PlayerName");
+            statement.setString(1, playerName);
             statement.setInt(2, finalScore);
             statement.executeUpdate();
             System.out.println("Puntaje insertado en la base de datos: " + finalScore);
