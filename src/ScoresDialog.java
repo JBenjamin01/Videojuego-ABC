@@ -1,5 +1,7 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +18,8 @@ public class ScoresDialog extends JDialog {
         setLayout(new BorderLayout());
 
         scoresTable = new JTable();
+        customizeTable();
+
         JScrollPane scrollPane = new JScrollPane(scoresTable);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -40,5 +44,21 @@ public class ScoresDialog extends JDialog {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void customizeTable() {
+        JTableHeader header = scoresTable.getTableHeader();
+        header.setBackground(Color.BLACK);
+        header.setForeground(Color.WHITE);
+        header.setFont(new Font("Arial", Font.BOLD, 14));
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        scoresTable.setDefaultRenderer(Object.class, centerRenderer);
+        scoresTable.setRowHeight(25);
+        scoresTable.setFont(new Font("Arial", Font.PLAIN, 12));
+        scoresTable.setSelectionBackground(Color.LIGHT_GRAY);
+        scoresTable.setSelectionForeground(Color.BLACK);
     }
 }
