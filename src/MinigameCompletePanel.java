@@ -79,6 +79,18 @@ public class MinigameCompletePanel extends JPanel {
         // Añadir el panel de contenido al panel principal
         contentPanel.add(answersPanel, BorderLayout.CENTER);
 
+        JButton soundButton = new JButton("Reproducir sonido");
+        soundButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playSound("sounds/Tercer-mini-juego.wav");
+            }
+        });
+        JPanel soundPanel = new JPanel();
+        soundPanel.setOpaque(false);
+        soundPanel.add(soundButton);
+
+        add(soundPanel, BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
     }
 

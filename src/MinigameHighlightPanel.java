@@ -1,6 +1,8 @@
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -17,9 +19,11 @@ public class MinigameHighlightPanel extends JPanel {
     private static final String[] WORDS = {"ELEFANTE", "UKELELE", "IGLESIA", "OSCURO", "ANILLO"};
     private int currentWordIndex = 0;
     private JButton nextButton;
+    private JButton soundButton;
     private int wordScore;
     private int totalVowels;
     private int markedVowels;
+    private JPanel contentPanel; // Panel para el contenido principal
 
     public MinigameHighlightPanel(MinigamesPanel parentPanel) {
         this.parentPanel = parentPanel;
@@ -33,48 +37,64 @@ public class MinigameHighlightPanel extends JPanel {
         vowelSounds.put('O', "sounds/o.wav");
         vowelSounds.put('U', "sounds/u.wav");
 
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(0, 0, 0, 0);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        setLayout(new BorderLayout()); // Usar BorderLayout para organizar los componentes
+
+        soundButton = new JButton("Reproducir sonido");
+        soundButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playSound("sounds/Cuarto-mini-juego.wav");
+            }
+        });
+
+        JPanel soundPanel = new JPanel();
+        soundPanel.setOpaque(false);
+        soundPanel.add(soundButton);
+
+        add(soundPanel, BorderLayout.NORTH); // Agregar el botón de sonido en la parte superior
+
+        contentPanel = new JPanel(new GridBagLayout()); // Panel para el contenido principal
+        contentPanel.setOpaque(false); // Asegúrate de que el panel de contenido sea transparente para que la imagen de fondo se vea
+        add(contentPanel, BorderLayout.CENTER); // Agregar el panel de contenido al centro
 
         nextButton = new JButton(new ImageIcon(getClass().getResource("/imagenes/siguiente.png")));
         nextButton.setBorderPainted(false);
         nextButton.setContentAreaFilled(false);
         nextButton.addActionListener(e -> goToNextWord());
 
-        displayCurrentWord(gbc);
+        displayCurrentWord();
     }
 
-    private void displayCurrentWord(GridBagConstraints gbc) {
-        removeAll();
+    private void displayCurrentWord() {
+        contentPanel.removeAll();
         String word = WORDS[currentWordIndex];
         letterLabels = new JLabel[word.length()];
         wordScore = 0;
         totalVowels = 0;
         markedVowels = 0;
-    
-        gbc.gridwidth = 1;
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.gridx = 0;
         gbc.gridy = 0;
-    
+        gbc.gridwidth = 1;
+
         for (int i = 0; i < word.length(); i++) {
             letterLabels[i] = createLetterLabel(word.charAt(i));
             if (isVowel(word.charAt(i))) {
                 totalVowels++;
             }
             gbc.gridx = i;
-            add(letterLabels[i], gbc);
+            contentPanel.add(letterLabels[i], gbc);
         }
-    
+
         gbc.gridy = 1;
         gbc.gridx = 0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        add(nextButton, gbc);
-    
-        revalidate();
-        repaint();
+        contentPanel.add(nextButton, gbc);
+
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
 
     private JLabel createLetterLabel(char letter) {
@@ -135,12 +155,12 @@ public class MinigameHighlightPanel extends JPanel {
         } else {
             wordScore = 0;
         }
-    
+
         totalScore += wordScore;
-    
+
         if (currentWordIndex < WORDS.length - 1) {
             currentWordIndex++;
-            displayCurrentWord(new GridBagConstraints());
+            displayCurrentWord();
         } else {
             showResults();
         }

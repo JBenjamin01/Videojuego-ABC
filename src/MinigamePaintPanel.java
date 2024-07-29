@@ -1,7 +1,14 @@
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -104,6 +111,9 @@ public class MinigamePaintPanel extends JPanel {
             e.printStackTrace();
         }
 
+        JButton soundButton = new JButton("Reproducir Sonido");
+        soundButton.addActionListener(e -> playSound("sounds/Segundo-mini-juego.wav"));
+
         nextLevelButton = new JButton("Siguiente Nivel");
         nextLevelButton.setFont(new Font("Cooper Black", Font.BOLD, 18));
         nextLevelButton.addActionListener(e -> {
@@ -142,12 +152,14 @@ public class MinigamePaintPanel extends JPanel {
         subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         feedbackLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nextLevelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        soundButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         controlPanel.add(titleLabel);
         controlPanel.add(subtitleLabel);
         controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         controlPanel.add(feedbackLabel);
         controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         controlPanel.add(nextLevelButton);
+        controlPanel.add(soundButton);
 
         add(controlPanel, BorderLayout.NORTH);
 
@@ -220,6 +232,18 @@ public class MinigamePaintPanel extends JPanel {
                 "Evaluación",
                 JOptionPane.INFORMATION_MESSAGE);
         parentPanel.showMinigame("Complete");
+    }
+
+    private void playSound(String soundFile) {
+        try {
+            File audioFile = new File(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
