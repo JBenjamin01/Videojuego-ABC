@@ -178,11 +178,6 @@ public class MinigamePaintPanel extends JPanel {
         });
     }
 
-    private boolean isCorrectCell(int row, int col) {
-        Set<Point> currentLevelPoints = getCurrentLevelPoints();
-        return currentLevelPoints.contains(new Point(row, col));
-    }
-
     private boolean isLevelCorrect() {
         Set<Point> currentLevelPoints = getCurrentLevelPoints();
         for (Point p : currentLevelPoints) {
