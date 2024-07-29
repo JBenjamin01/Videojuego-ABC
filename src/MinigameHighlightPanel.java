@@ -51,11 +51,11 @@ public class MinigameHighlightPanel extends JPanel {
         soundPanel.setOpaque(false);
         soundPanel.add(soundButton);
 
-        add(soundPanel, BorderLayout.NORTH); // Agregar el botón de sonido en la parte superior
+        add(soundPanel, BorderLayout.NORTH);
 
-        contentPanel = new JPanel(new GridBagLayout()); // Panel para el contenido principal
-        contentPanel.setOpaque(false); // Asegúrate de que el panel de contenido sea transparente para que la imagen de fondo se vea
-        add(contentPanel, BorderLayout.CENTER); // Agregar el panel de contenido al centro
+        contentPanel = new JPanel(new GridBagLayout());
+        contentPanel.setOpaque(false);
+        add(contentPanel, BorderLayout.CENTER);
 
         nextButton = new JButton(new ImageIcon(getClass().getResource("/imagenes/siguiente.png")));
         nextButton.setBorderPainted(false);
@@ -74,7 +74,7 @@ public class MinigameHighlightPanel extends JPanel {
         markedVowels = 0;
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
@@ -91,6 +91,7 @@ public class MinigameHighlightPanel extends JPanel {
         gbc.gridy = 1;
         gbc.gridx = 0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.insets = new Insets(30, 10, 10, 10);
         contentPanel.add(nextButton, gbc);
 
         contentPanel.revalidate();
@@ -99,11 +100,11 @@ public class MinigameHighlightPanel extends JPanel {
 
     private JLabel createLetterLabel(char letter) {
         JLabel label = new JLabel(String.valueOf(letter), SwingConstants.CENTER);
-        label.setFont(new Font("Cooper Black", Font.PLAIN, 48));
+        label.setFont(new Font("Cooper Black", Font.PLAIN, 70));
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         label.setOpaque(true);
         label.setBackground(Color.WHITE);
-        label.setPreferredSize(new Dimension(70, 70));
+        label.setPreferredSize(new Dimension(150, 150));
         label.addMouseListener(new HighlightMouseAdapter(label, letter));
         return label;
     }
