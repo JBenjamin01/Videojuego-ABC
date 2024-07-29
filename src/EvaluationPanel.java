@@ -1,9 +1,3 @@
-/**
- * EvaluationPanel es un panel de evaluación interactivo para niños,
- * donde se les presentan ejercicios para completar palabras faltantes con vocales.
- * Los ejercicios incluyen la visualización de una imagen relacionada
- * y la reproducción del sonido correspondiente cuando se completa correctamente un ejercicio.
- */
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +7,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * EvaluationPanel es un panel de evaluación interactivo para niños,
+ * donde se les presentan ejercicios para completar palabras faltantes con vocales.
+ * Los ejercicios incluyen la visualización de una imagen relacionada
+ * y la reproducción del sonido correspondiente cuando se completa correctamente un ejercicio.
+ */
 
 public class EvaluationPanel extends JPanel {
     private ImageIcon fondo;
