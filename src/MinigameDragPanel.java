@@ -32,6 +32,7 @@ public class MinigameDragPanel extends JPanel {
         setLayout(new BorderLayout());
 
         JButton soundButton = new JButton("Primer ejercicio");
+        soundButton.setFont(new Font("Cooper Black", Font.BOLD, 20));
         soundButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,7 +50,7 @@ public class MinigameDragPanel extends JPanel {
         verticalContainer.setOpaque(false);
 
         // Panel para envolver el panel de las vocales
-        JPanel dragPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        JPanel dragPanelContainer = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 20)); // Más espacio arriba
         dragPanelContainer.setOpaque(false);
 
         // Panel para envolver el panel de la cuadrícula
@@ -60,21 +61,21 @@ public class MinigameDragPanel extends JPanel {
         dragPanel = new JPanel();
         dragPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
         dragPanel.setOpaque(false);
-        dragPanel.setPreferredSize(new Dimension(500, 100));
+        dragPanel.setPreferredSize(new Dimension(1200, 400));
 
         // Panel para la cuadrícula
-        gridPanel = new JPanel(new GridLayout(1, 5, 20, 20));
+        gridPanel = new JPanel(new GridLayout(1, 5, 30, 30));
         gridPanel.setOpaque(false);
-        gridPanel.setPreferredSize(new Dimension(750, 150));
+        gridPanel.setPreferredSize(new Dimension(1200, 300));
 
         gridLabels = new HashMap<>();
-        Dimension labelSize = new Dimension(50, 160);
-        Font labelFont = new Font("Cooper Black", Font.BOLD, 40);
+        Dimension labelSize = new Dimension(100, 200);
+        Font labelFont = new Font("Cooper Black", Font.BOLD, 60);
 
         for (int i = 0; i < 5; i++) {
             JLabel gridLabel = new JLabel("", SwingConstants.CENTER);
             gridLabel.setFont(labelFont);
-            gridLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+            gridLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 6)); // Borde más grueso
             gridLabel.setPreferredSize(labelSize);
             gridLabel.setOpaque(true);
             gridLabel.setBackground(new Color(230, 230, 230));
@@ -88,11 +89,11 @@ public class MinigameDragPanel extends JPanel {
 
         for (String vowel : vowels) {
             JLabel dragLabel = new JLabel(vowel, SwingConstants.CENTER);
-            dragLabel.setFont(new Font("Cooper Black", Font.BOLD, 24));
-            dragLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
+            dragLabel.setFont(new Font("Cooper Black", Font.BOLD, 60));
+            dragLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 6));
             dragLabel.setOpaque(true);
             dragLabel.setBackground(Color.WHITE);
-            dragLabel.setPreferredSize(new Dimension(80, 80));
+            dragLabel.setPreferredSize(new Dimension(150, 150));
             dragLabel.setTransferHandler(new TransferHandler("text"));
             dragLabel.addMouseListener(new MouseAdapter() {
                 @Override
