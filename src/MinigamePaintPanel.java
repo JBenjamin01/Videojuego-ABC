@@ -141,7 +141,7 @@ public class MinigamePaintPanel extends JPanel {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Cooper Black", Font.BOLD, 24));
 
-        subtitleLabel = new JLabel("Con ayuda de las imágenes pinta los cuadrados vacíos para dibujar las vocales");
+        subtitleLabel = new JLabel("Pinta los cuadrados vacíos para dibujar las vocales");
         subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         subtitleLabel.setFont(new Font("Cooper Black", Font.PLAIN, 18));
 
