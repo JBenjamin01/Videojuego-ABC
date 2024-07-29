@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * MinigamePaintPanel es un panel para un minijuego en el que los usuarios dibujan las vocales
+ * haciendo click en los recuadros logrando asi pintar cada recuadro. Incluye botones para reproducir la informacion y validar respuestas.
+ */
+
 public class MinigamePaintPanel extends JPanel {
     private static final int[] GRID_ROWS = {5, 5, 5, 5, 5};
     private static final int[] GRID_COLS = {4, 3, 3, 4, 4};
