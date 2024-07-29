@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,29 +13,43 @@ public class NameEntryPanel extends JPanel {
     public NameEntryPanel(Game game) {
         this.game = game;
         fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
-        setLayout(new BorderLayout());
-        setOpaque(false); // Hacer el panel transparente para mostrar el fondo
+        setLayout(new GridBagLayout());
+        setOpaque(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.CENTER;
 
         // Panel para la entrada del nombre
         JPanel inputPanel = new JPanel();
         inputPanel.setOpaque(false);
-        inputPanel.setLayout(new FlowLayout());
+        inputPanel.setLayout(new GridBagLayout());
+        GridBagConstraints inputGbc = new GridBagConstraints();
+        inputGbc.insets = new Insets(5, 5, 20, 5);
+        inputGbc.anchor = GridBagConstraints.CENTER;
 
         JLabel nameLabel = new JLabel("Ingresa tu nombre:");
-        nameLabel.setFont(new Font("Serif", Font.PLAIN, 24));
-        nameLabel.setForeground(Color.WHITE);
-        inputPanel.add(nameLabel);
+        nameLabel.setFont(new Font("Serif", Font.PLAIN, 70));
+        nameLabel.setForeground(Color.BLACK);
+        inputGbc.gridx = 0;
+        inputGbc.gridy = 0;
+        inputPanel.add(nameLabel, inputGbc);
 
-        nameField = new JTextField(20);
-        nameField.setFont(new Font("Serif", Font.PLAIN, 20));
-        inputPanel.add(nameField);
+        nameField = new JTextField(30);
+        nameField.setFont(new Font("Serif", Font.PLAIN, 45));
+        inputGbc.gridy = 1;
+        inputPanel.add(nameField, inputGbc);
 
         startButton = new JButton("Empezar");
-        startButton.setFont(new Font("Serif", Font.PLAIN, 20));
+        startButton.setFont(new Font("Serif", Font.PLAIN, 40));
         startButton.setFocusPainted(false);
         startButton.setBackground(new Color(0, 102, 204));
         startButton.setForeground(Color.WHITE);
-        startButton.setBorder(BorderFactory.createRaisedBevelBorder());
+
+        Border border = BorderFactory.createLineBorder(Color.BLACK, 5);
+        Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
+        startButton.setBorder(BorderFactory.createCompoundBorder(border, raisedBevelBorder));
+
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,9 +64,12 @@ public class NameEntryPanel extends JPanel {
                 }
             }
         });
-        inputPanel.add(startButton);
+        inputGbc.gridy = 2;
+        inputPanel.add(startButton, inputGbc);
 
-        add(inputPanel, BorderLayout.CENTER);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(inputPanel, gbc);
     }
 
     @Override
