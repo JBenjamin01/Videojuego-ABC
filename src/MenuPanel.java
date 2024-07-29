@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MenuPanel extends JPanel {
     private ImageIcon fondo;
@@ -46,6 +50,14 @@ public class MenuPanel extends JPanel {
             }
         });
 
+        JButton scoresButton = new JButton("Mostrar Puntuaciones");
+        scoresButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showScoresDialog();
+            }
+        });
+
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -57,13 +69,16 @@ public class MenuPanel extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         add(image, gbc);
 
+        gbc.gridy = 1;
+        add(scoresButton, gbc);
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         buttonPanel.add(startButton);
         buttonPanel.add(creditsButton);
         buttonPanel.add(exitButton);
 
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         add(buttonPanel, gbc);
     }
 
@@ -77,5 +92,10 @@ public class MenuPanel extends JPanel {
         ImageIcon originalIcon = new ImageIcon(getClass().getResource(path));
         Image resizedImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
+    }
+
+    private void showScoresDialog() {
+        ScoresDialog scoresDialog = new ScoresDialog();
+        scoresDialog.setVisible(true);
     }
 }
