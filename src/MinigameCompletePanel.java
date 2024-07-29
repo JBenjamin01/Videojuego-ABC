@@ -107,18 +107,18 @@ public class MinigameCompletePanel extends JPanel {
      */
     private Map<String, String> getRandomExercises() {
         Map<String, String> allExercises = new LinkedHashMap<>();
-        allExercises.put("_MIG_", "AMIGO");
+        allExercises.put("_N_C_RN__", "UNICORNIO");
         allExercises.put("S_NT_MI_NT_", "SENTIMIENTO");
-        allExercises.put("_B_EL_", "ABUELO");
+        allExercises.put("_G__N_", "IGUANA");
         allExercises.put("COR_Z_N", "CORAZON");
         allExercises.put("C_L_GI_", "COLEGIO");
-        allExercises.put("M_S_", "MESA");
+        allExercises.put("_SC__L_", "ESCUELA");
         allExercises.put("S_P_", "SAPO");
         allExercises.put("F_L_N_", "FELINO");
         allExercises.put("T_R_A", "TAREA");
         allExercises.put("D_R_ZN_", "DURAZNO");
         allExercises.put("P_N_T_N", "PANETON");
-        allExercises.put("B_RR_R", "BARRER");
+        allExercises.put("_STR_LL_", "ESTRELLA");
         allExercises.put("V_L_A", "VELA");
         allExercises.put("C_LC__", "CALCIO");
         allExercises.put("GR_C__", "GRACIA");
