@@ -16,7 +16,7 @@ public class CharacterSelectionPanel extends JPanel {
 
     public CharacterSelectionPanel(Game game) {
         // Añado la imagen de fondo
-        fondo = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+        fondo = new ImageIcon(getClass().getResource("/imagenes/menu.gif")).getImage();
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
