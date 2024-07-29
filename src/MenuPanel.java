@@ -26,7 +26,7 @@ public class MenuPanel extends JPanel {
         startButton.setContentAreaFilled(false);
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                game.showPanel("CharacterSelection");
+                game.showPanel("NameEntry");
             }
         });
 

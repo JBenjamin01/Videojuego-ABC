@@ -16,15 +16,14 @@ public class Game extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        mainPanel.add(new NameEntryPanel(this), "NameEntry");
-
         mainPanel.add(new MenuPanel(this), "Menu");
+        mainPanel.add(new NameEntryPanel(this), "NameEntry");
         mainPanel.add(new CharacterSelectionPanel(this), "CharacterSelection");
         mainPanel.add(new VowelLearningPanel(this), "VowelLearning");
         mainPanel.add(new EvaluationPanel(this), "Evaluation");
         mainPanel.add(new MinigamesPanel(this), "Minigame");
         mainPanel.add(new ResultsPanel(this), "Results"); 
-        
+
         try {
             File audioFile = new File("sounds/bg.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);

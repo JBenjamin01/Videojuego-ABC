@@ -58,7 +58,7 @@ public class NameEntryPanel extends JPanel {
                     // Guardar el nombre del jugador en el juego
                     game.setPlayerName(playerName);
                     // Mostrar el panel de menú
-                    game.showPanel("Menu");
+                    game.showPanel("CharacterSelection");
                 } else {
                     JOptionPane.showMessageDialog(NameEntryPanel.this, "Por favor ingresa un nombre.", "Nombre requerido", JOptionPane.WARNING_MESSAGE);
                 }
