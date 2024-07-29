@@ -109,19 +109,19 @@ public class MinigameCompletePanel extends JPanel {
         Map<String, String> allExercises = new LinkedHashMap<>();
         allExercises.put("_N_C_RN__", "UNICORNIO");
         allExercises.put("S_NT_MI_NT_", "SENTIMIENTO");
-        allExercises.put("_G__N_", "IGUANA");
+        allExercises.put("_GU_N_", "IGUANA");
         allExercises.put("COR_Z_N", "CORAZON");
         allExercises.put("C_L_GI_", "COLEGIO");
-        allExercises.put("_SC__L_", "ESCUELA");
+        allExercises.put("_SCU_L_", "ESCUELA");
         allExercises.put("S_P_", "SAPO");
         allExercises.put("F_L_N_", "FELINO");
         allExercises.put("T_R_A", "TAREA");
         allExercises.put("D_R_ZN_", "DURAZNO");
         allExercises.put("P_N_T_N", "PANETON");
         allExercises.put("_STR_LL_", "ESTRELLA");
-        allExercises.put("V_L_A", "VELA");
-        allExercises.put("C_LC__", "CALCIO");
-        allExercises.put("GR_C__", "GRACIA");
+        allExercises.put("V_L_", "VELA");
+        allExercises.put("C_LC_O", "CALCIO");
+        allExercises.put("GR_CI_", "GRACIA");
 
         // Seleccionar 5 ejercicios aleatorios de los 15 disponibles
         java.util.List<String> keys = new ArrayList<>(allExercises.keySet());
