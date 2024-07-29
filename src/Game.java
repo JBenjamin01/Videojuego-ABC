@@ -25,6 +25,7 @@ public class Game {
         mainPanel.add(new EvaluationPanel(this), "Evaluation");
         mainPanel.add(new MinigamesPanel(this), "Minigame");
         mainPanel.add(new ResultsPanel(this), "Results");
+        mainPanel.add(new CreditsPanel(this), "Credits"); // Agregar el CreditsPanel
 
         mainFrame.add(mainPanel);
         mainFrame.setVisible(true);
