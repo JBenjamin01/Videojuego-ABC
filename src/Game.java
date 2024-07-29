@@ -2,18 +2,30 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.CardLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 
 public class Game extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private String personajeEscojido;
+    private String playerName; // Variable para almacenar el nombre del jugador
+
     public Game() {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
+
+        // Agregar el panel de entrada del nombre
+        mainPanel.add(new NameEntryPanel(this), "NameEntry");
+
+        // Agregar los demás paneles
+        mainPanel.add(new MenuPanel(this), "Menu");
+        mainPanel.add(new CharacterSelectionPanel(this), "CharacterSelection");
+        mainPanel.add(new VowelLearningPanel(this), "VowelLearning");
+        mainPanel.add(new EvaluationPanel(this), "Evaluation");
+        mainPanel.add(new MinigamesPanel(this), "Minigame");
+        mainPanel.add(new ResultsPanel(this), "Results"); 
 
         try {
             File audioFile = new File("sounds/bg.wav");
@@ -34,14 +46,6 @@ public class Game extends JFrame {
             ex.printStackTrace();
         }
 
-        // Agregar paneles a la interfaz
-        mainPanel.add(new MenuPanel(this), "Menu");
-        mainPanel.add(new CharacterSelectionPanel(this), "CharacterSelection");
-        mainPanel.add(new VowelLearningPanel(this), "VowelLearning");
-        mainPanel.add(new EvaluationPanel(this), "Evaluation");
-        mainPanel.add(new MinigamesPanel(this), "Minigame");
-        mainPanel.add(new ResultsPanel(this), "Results"); 
-
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.add(mainPanel);
@@ -61,6 +65,14 @@ public class Game extends JFrame {
 
     public void showPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 
     public static void main(String[] args) {
